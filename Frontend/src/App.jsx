@@ -1,19 +1,49 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./App.css";
 import Header from "./component/Header/Header";
-import { BrowserRouter } from "react-router-dom";
+import MyFooter from "./component/Footer/Footer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import SpinnerLoading from "./component/SpinnerLoading/SpinnerLoading";
+import { StationsContextProvider } from "./context/StationsContext";
 
 function App() {
+  const Home = React.lazy(() => import("./pages/admin/Home/Home"));
+  const Dashboard = React.lazy(() => import("./pages/admin/Dashboard"));
+  const StationsList = React.lazy(() =>
+    import("./pages/admin/Station/StationsList")
+  );
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <ToastContainer 
-        position="top-right" autoClose={2500} hideProgressBar={false} newestOnTop
-        closeOnClick rtl={false} pauseOnFocusLoss={false} draggable pauseOnHover theme="dark"
-        />
-      </BrowserRouter>
+      <Suspense fallback={<SpinnerLoading />}>
+        <BrowserRouter>
+          <StationsContextProvider>
+            <Header />
+            <ToastContainer
+              position="top-center"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+            />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/dashboard/stationsList"
+                element={<StationsList />}
+              />
+            </Routes>
+            <MyFooter />
+          </StationsContextProvider>
+        </BrowserRouter>
+      </Suspense>
     </div>
   );
 }
