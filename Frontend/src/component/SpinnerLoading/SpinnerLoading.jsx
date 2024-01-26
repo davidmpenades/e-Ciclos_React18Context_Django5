@@ -2,7 +2,8 @@ import "./SpinnerLoading.css";
 
 export default function SpinnerLoading() {
   return (
-    <div>
+    <div className="loader-container">
+    <div className="loader">
       <svg height="108px" width="108px" viewBox="0 0 128 128" className="loader">
         <defs>
           <clipPath id="loader-eyes">
@@ -91,5 +92,6 @@ export default function SpinnerLoading() {
         </g>
       </svg>
     </div>
+  </div>
   );
 }

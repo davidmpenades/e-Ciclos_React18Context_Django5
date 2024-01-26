@@ -66,15 +66,10 @@ ul li a{
     transition: 0.5s;
 
 }
-ul li a:hover, .active , .box:hover, td:hover{
-    background-color: #0de71855;
-    cursor: pointer;
-}
 .log-out{
     position: absolute;
     bottom: 0;
     width: 100%;
-
 }
 
 ul li a i{
@@ -101,50 +96,19 @@ ul li a i{
     gap: 10px;
 
 }
-.box{
-    background-color: rgb(220, 235, 225);
-    height: 150px;
-    flex-basis: 150px;
-    flex-grow: 1;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-}
-
-.box i{
-    font-size:40px
-}
-.box .data{
-    text-align: center;
-}
-
-.box .data span{
-    font-size: 30px;
-}
 table{
     width: 100%;
     text-align: center;
     border-spacing: 8px;
-
 }
 th,td{
     background-color: rgb(188, 241, 188);
-    height: 40px;
+    height: 60px;
     border-radius: 8px;
 }
 th{
     background-color: #c9dbee;
 }
-.price , .count{
-    padding: 6px;
-    border-radius: 6px;
-}
-.price{
-    background-color: green;
-}
-.count{
-    background-color: gold;
-    color: black;
+a,p:hover{
+    cursor: pointer;
 }

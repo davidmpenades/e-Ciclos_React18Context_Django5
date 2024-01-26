@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import logo from "../../assets/logo.png";
 import { Button } from "flowbite-react";
 import StationsList from "./Station/StationsList";
+import BikesList from "./Bikes/BikesList";
 import cartel from "../../assets/cartel.png";
 
 const Dashboard = () => {
@@ -22,7 +23,7 @@ const Dashboard = () => {
       case "Stations":
         return <StationsList />;
       case "Bikes":
-        return <h1>bikes</h1>;
+        return <BikesList />;
       case "Slots":
         return <h1>slots</h1>;
       case "Users":
@@ -50,8 +51,8 @@ const Dashboard = () => {
                 fill="none"
                 stroke="currentColor"
               >
-                {" "}
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />{" "}
+               
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
               <p>dashboard</p>
@@ -90,7 +91,7 @@ const Dashboard = () => {
                 <polyline points="12 19 12 15 9 12 14 8 16 11 19 11" />{" "}
                 <circle cx="17" cy="5" r="1" />
               </svg>
-              <p>bikes</p>
+              <p>Bikes</p>
             </a>
           </li>
           <li>
@@ -124,9 +125,21 @@ const Dashboard = () => {
             </a>
           </li>
         </ul>
-        <Button className="text-zinc-700 hover:text-zinc-200 backdrop-blur-lg bg-gradient-to-tr from-transparent via-[rgba(0,0,0,0.5)] to-transparent rounded-md py-2 px-6 shadow hover:shadow-zinc-400 duration-700"
-         onClick={() => navigate("/")}>
-          Back to home
+        <Button onClick={() => navigate("/")}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+            />
+          </svg>
         </Button>
       </div>
 

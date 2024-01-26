@@ -1,6 +1,4 @@
 import React from "react";
-import { Button } from "flowbite-react";
-import "./StationsListAdmin.css";
 import ModalDelete from "./Modals/ModalDelete";
 import ModalAddUpdate from "./Modals/ModalAddUpdate";
 
@@ -29,7 +27,7 @@ export default function StationsListAdmin({ station, deleteStation, updateStatio
             <td className="border w-32">
               <span>{station.status}</span>
             </td>
-            <td className="flex flex-wrap w-42">
+            <td className="flex flex-wrap w-32">
               <ModalAddUpdate modalType={modalType} station={station} updateStation={updateStation}/>
               <ModalDelete deleted={() => deleteStation(station.id)}/>              
             </td>

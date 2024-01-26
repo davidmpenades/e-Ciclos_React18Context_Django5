@@ -2,29 +2,24 @@ import { Button, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import iconAdd from "../../../../assets/icons/iconAdd.svg";
 import iconEdit from "../../../../assets/icons/iconEdit.svg";
+
 export default function ModalAdd({
   add,
-  station = {
+  bike = {
     id: "",
     slug: "",
-    name: "",
-    num_bikes: "",
-    latitude: "",
-    longitude: "",
+    name_bike: "",
     status: "",
-    img_st: "",
+    img_bike: "",
   },
   modalType,
-  updateStation,
+  updateBike,
 }) {
   const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState({
-    name: station.slug != "" ? station.name : "",
-    num_bikes: station.slug != "" ? station.num_bikes : 0,
-    latitude: station.slug != "" ? station.latitude : "",
-    longitude: station.slug != "" ? station.longitude : "",
-    status: station.slug != "" ? station.status : "",
-    img_st: station.slug != "" ? station.img_st : "",
+    name_bike: bike.slug != "" ? bike.name_bike : "",
+    status: bike.slug != "" ? bike.status : "",
+    img_bike: bike.slug != "" ? bike.img_bike : "",
   });
 
   const TypeModal =
@@ -37,8 +32,9 @@ export default function ModalAdd({
         <img src={iconEdit} alt="iconAdd"/>
       </div>
     );
+
   const ColorButton = modalType === "add" ? "success" : "blue";
-  const TitleModal = modalType === "add" ? "Create Station" : "Update Station";
+  const TitleModal = modalType === "add" ? "Create bike" : "Update bike";
   const ButtonAccepted = modalType === "add" ? "Create" : "Update";
 
   const handleInputChange = (e) => {
@@ -57,13 +53,13 @@ export default function ModalAdd({
     } else {
       console.log("update");
       setOpenModal(false);
-      updateStation(formData, station.id);
+      updateBike(formData, bike.id);
     }
   };
 
   return (
     <>
-      <Button onClick={() => setOpenModal(true)} color={ColorButton} style={{height:'60px', width:'64px'}}>
+      <Button onClick={() => setOpenModal(true)} color={ColorButton} style={{height:'60px', width:'70px'}}>
         {TypeModal}
       </Button>
 
@@ -81,49 +77,12 @@ export default function ModalAdd({
             </h3>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="Text" value="name" />
+                <Label htmlFor="Text" value="name bike:" />
               </div>
               <TextInput
-                id="name"
+                id="name_bike"
                 placeholder="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 ">
-                <Label htmlFor="Number" value=" Number_bikes" />
-              </div>
-              <TextInput
-                id="num_bikes"
-                type="number"
-                value={formData.num_bikes}
-                placeholder="Number bikes"
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="Text" value="Latitude" />
-              </div>
-              <TextInput
-                id="latitude"
-                placeholder="Latitude"
-                value={formData.latitude}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="Text" value="longitude" />
-              </div>
-              <TextInput
-                id="longitude"
-                placeholder="longitude"
-                value={formData.longitude}
+                value={formData.name_bike}
                 onChange={handleInputChange}
                 required
               />
@@ -145,9 +104,9 @@ export default function ModalAdd({
                 <Label htmlFor="Text" value="image" />
               </div>
               <TextInput
-                id="img_st"
+                id="img_bike"
                 placeholder="image"
-                value={formData.img_st}
+                value={formData.img_bike}
                 onChange={handleInputChange}
                 required
               />

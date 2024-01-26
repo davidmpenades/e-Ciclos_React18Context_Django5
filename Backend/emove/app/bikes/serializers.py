@@ -6,7 +6,7 @@ from random import randint
 class BikesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bikes
-        fields = ('id','slug','name_bike','status')
+        fields = ('id','slug','name_bike','status','img_bike')
         
         def create(self, instance):
             return {
