@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import SpinnerLoading from "./component/SpinnerLoading/SpinnerLoading";
 import { StationsContextProvider } from "./context/StationsContext";
 import { BikesContextProvider } from "./context/BikesContext";
+import Plan from "./pages/Plan/Plan";
 
 function App() {
   const Home = React.lazy(() => import("./pages/Home/Home"));
@@ -15,6 +16,7 @@ function App() {
     import("./pages/admin/Station/StationsList")
   );
   const BikesList = React.lazy(() => import("./pages/admin/Bikes/BikesList"));
+  const Plan = React.lazy(() => import("./pages/Plan/Plan"));
 
   return (
     <div className="App">
@@ -42,6 +44,7 @@ function App() {
                   path="/dashboard/stationsList"
                   element={<StationsList />}
                 />
+                <Route path="/plan" element={<Plan />} />
               </Routes>
               <MyFooter />
             </BikesContextProvider>
