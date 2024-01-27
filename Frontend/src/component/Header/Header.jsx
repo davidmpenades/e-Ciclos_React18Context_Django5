@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import "./Header.css";
-import logo from "../../assets/logo2.png";
+import logo from "../../assets/imgs/logo2.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
@@ -10,7 +10,7 @@ export default function Header() {
 
     const redirect = {
         dashboard: () => navigate("/dashboard"),
-        // rent: () => navigate("/rent"),
+        rent: () => navigate("/rent"),
     };
     return (
         <Navbar fluid rounded>
@@ -39,12 +39,11 @@ export default function Header() {
           </div>
           <Navbar.Collapse>
             <Navbar.Link href="/" active>
-              Home
+              Inicio
             </Navbar.Link>
-            <Navbar.Link href="#">About</Navbar.Link>
-            {/* <Navbar.Link onClick={redirect.rent}>Rent</Navbar.Link> */}
-            {/* <Navbar.Link href="#">Pricing</Navbar.Link> */}
-            <Navbar.Link href="#">Contact</Navbar.Link>
+            <Navbar.Link onClick={redirect.rent}>Alquiler</Navbar.Link>
+            <Navbar.Link href="#">Precios</Navbar.Link>
+            <Navbar.Link href="#">Contacto</Navbar.Link>
           </Navbar.Collapse>
         </Navbar>
       ); }

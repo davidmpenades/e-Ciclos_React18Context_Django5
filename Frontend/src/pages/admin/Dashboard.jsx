@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/imgs/logo.png";
 import { Button } from "flowbite-react";
 import StationsList from "./Station/StationsList";
 import BikesList from "./Bikes/BikesList";
-import cartel from "../../assets/cartel.png";
+import cartel from "../../assets/imgs/cartel.png";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const Dashboard = () => {
             <div className="img-box">
               <img src={logo} alt="image" />
             </div>
-            <h2>Admin</h2>
+            <h2>Administrador</h2>
           </li>
           <li>
             <a onClick={() => handleSelectItem("Dashboard")}>
@@ -73,7 +73,7 @@ const Dashboard = () => {
                 <path d="M4 6v6a8 3 0 0 0 16 0v-6" />{" "}
                 <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
               </svg>
-              <p>Stations</p>
+              <p>Estaciones</p>
             </a>
           </li>
           <li>
@@ -91,7 +91,7 @@ const Dashboard = () => {
                 <polyline points="12 19 12 15 9 12 14 8 16 11 19 11" />{" "}
                 <circle cx="17" cy="5" r="1" />
               </svg>
-              <p>Bikes</p>
+              <p>Bicicletas</p>
             </a>
           </li>
           <li>
@@ -105,7 +105,7 @@ const Dashboard = () => {
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
 
-              <p>slots</p>
+              <p>Parking</p>
             </a>
           </li>
           <li>
@@ -121,7 +121,7 @@ const Dashboard = () => {
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87" />{" "}
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
-              <p>users</p>
+              <p>Usuarios</p>
             </a>
           </li>
         </ul>

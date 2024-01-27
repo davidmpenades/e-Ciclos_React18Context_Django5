@@ -8,7 +8,8 @@ export default function BikesList() {
   const modalType = "add";
   return (
     <div>
-      <div>
+      <div className="header flex items-center justify-between mb-2 mr-7">
+          <h1 className="font-bold text-3xl font-sans flex-grow text-center">Bicicletas</h1>
         <ModalAddUpdate modalType={modalType} add={useCreateBike} />
       </div>
       <div></div>
@@ -17,9 +18,9 @@ export default function BikesList() {
           <tr>
             <th className="border w-72">ID</th>
             <th className="border w-92">SLUG</th>
-            <th className="border w-72">NAME</th>
-            <th className="border w-72">STATUS</th>
-            <th className="border w-32">ACTIONS</th>
+            <th className="border w-72">NOMBRE</th>
+            <th className="border w-72">ESTADO</th>
+            <th className="border w-32">ACCIONES</th>
           </tr>
         </thead>
         <tbody>

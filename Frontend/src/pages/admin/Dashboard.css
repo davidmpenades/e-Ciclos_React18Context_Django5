@@ -112,3 +112,7 @@ th{
 a,p:hover{
     cursor: pointer;
 }
+li:hover{
+    background-color: rgb(188, 241, 188);
+    border-radius: 7px;
+}

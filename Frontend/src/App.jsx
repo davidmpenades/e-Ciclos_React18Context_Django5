@@ -9,7 +9,7 @@ import { StationsContextProvider } from "./context/StationsContext";
 import { BikesContextProvider } from "./context/BikesContext";
 
 function App() {
-  const Home = React.lazy(() => import("./pages/admin/Home/Home"));
+  const Home = React.lazy(() => import("./pages/Home/Home"));
   const Dashboard = React.lazy(() => import("./pages/admin/Dashboard"));
   const StationsList = React.lazy(() =>
     import("./pages/admin/Station/StationsList")

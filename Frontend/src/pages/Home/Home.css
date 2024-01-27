@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../../../assets/font/Type.ttf') format('truetype');    
+  }
+
+.videoHeader{
+  position: "relative"; 
+  width: 100%;
+  height: 60vh;
+}
+video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.quote{
+  position: absolute; 
+  top: 20%; 
+  left: 2%;
+  right:2%; 
+}
+.quoteText{
+  font-family: 'CustomFont';
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px #000000;
+  line-height: 1.5;
+}
+.quoteTextImage{
+  color: grey;
+}

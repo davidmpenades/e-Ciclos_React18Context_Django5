@@ -12,7 +12,7 @@ export default function ModalDelete({ deleted }) {
 
   return (
     <>
-      <Button onClick={() => setOpenModal(true)} color="failure">
+      <Button onClick={() => setOpenModal(true)} color="failure" style={{width:'70px'}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

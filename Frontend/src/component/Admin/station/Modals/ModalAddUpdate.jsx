@@ -63,7 +63,7 @@ export default function ModalAdd({
 
   return (
     <>
-      <Button onClick={() => setOpenModal(true)} color={ColorButton} style={{height:'60px', width:'64px'}}>
+      <Button onClick={() => setOpenModal(true)} color={ColorButton} style={{height:'60px', width:'70px'}}>
         {TypeModal}
       </Button>
 

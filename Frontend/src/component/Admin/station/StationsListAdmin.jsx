@@ -8,7 +8,7 @@ export default function StationsListAdmin({ station, deleteStation, updateStatio
   
   return (
           <tr>
-            <td className="border w-12">{station.id}</td>
+            <td className="border w-10">{station.id}</td>
             <td className="border w-72">
               <span>{station.slug}</span>
             </td>
@@ -27,7 +27,7 @@ export default function StationsListAdmin({ station, deleteStation, updateStatio
             <td className="border w-32">
               <span>{station.status}</span>
             </td>
-            <td className="flex flex-wrap w-32">
+            <td className="flex flex-wrap w-40">
               <ModalAddUpdate modalType={modalType} station={station} updateStation={updateStation}/>
               <ModalDelete deleted={() => deleteStation(station.id)}/>              
             </td>
