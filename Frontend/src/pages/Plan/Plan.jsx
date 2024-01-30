@@ -13,7 +13,7 @@ export default function Plan() {
     <div className="min-h-screen flex items-center justify-center" style={divStyle}>
         <h1 className="text-center m-20 rounded-lg text-4xl bg-white p-5 shadow-xl" style={{fontFamily:"CustomFont"}}> Empieza. Elige el plan que mejor se adapte a tí</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8 p-20">
-        <div className="rounded-2xl border border-green-400 p-6 shadow-sm ring-1 ring-green-400 sm:order-last sm:px-8 lg:p-12 shadow-2xl">
+        <div className="rounded-2xl border border-green-400 p-6 shadow-sm ring-1 ring-green-400 sm:order-last sm:px-8 lg:p-12 shadow-2xl backdrop-blur-md">
           <div className="text-center">
             <h2 className="text-lg font-medium text-gray-900">
               Intensivo
@@ -97,7 +97,7 @@ export default function Plan() {
           </a>
         </div>
 
-        <div className="rounded-2xl border border-blue-700 p-6 shadow-sm sm:px-8 lg:p-12">
+        <div className="rounded-2xl border border-blue-700 p-6 shadow-sm sm:px-8 lg:p-12 backdrop-blur-md">
           <div className="text-center">
             <h2 className="text-lg font-medium text-gray-900">
               Ocasional

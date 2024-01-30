@@ -53,6 +53,14 @@ export default function ModalAdd({
     if (modalType === "add") {
       console.log("add");
       setOpenModal(false);
+      setFormData({
+        name: "",
+        num_bikes: 0,
+        latitude: "",
+        longitude: "",
+        status: "",
+        img_st: "",
+      });
       add(formData);
     } else {
       console.log("update");

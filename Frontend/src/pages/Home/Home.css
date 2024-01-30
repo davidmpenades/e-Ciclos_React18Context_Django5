@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'CustomFont';
-    src: url('../../../assets/font/Type.ttf') format('truetype');    
+    font-family: '1942 Report';
+    src: url('../../../assets/font/1942.ttf') format('truetype');    
   }
 
 .videoHeader{
@@ -20,7 +20,7 @@ video{
   right:2%; 
 }
 .quoteText{
-  font-family: 'CustomFont';
+  font-family: '1942 Report' !important;
   font-size: 40px;
   color: white;
   text-align: center;

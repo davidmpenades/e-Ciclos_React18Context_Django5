@@ -48,6 +48,8 @@ export default function Contact() {
           }, 1800);
         },
         (error) => {
+          <Toaster position="top-center" richColors />;
+          toast.error("Error al enviar el mensaje");
           console.log(error.text);
         }
       );
@@ -55,7 +57,7 @@ export default function Contact() {
   return (
     <body className="text-white font-sans" style={divStyle}>
       <div className="min-h-screen flex items-center justify-center">
-        <div className=" p-8 rounded-lg w-full md:w-1/2 lg:w-1/3 border-4">
+        <div className=" p-8 rounded-lg w-full md:w-1/2 lg:w-1/3 border-4 backdrop-blur-md">
           <h2 className="text-3xl font-semibold mb-6 text-center text:shadow-lg">
             Contacta con nosotros
           </h2>

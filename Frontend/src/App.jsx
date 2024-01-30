@@ -17,6 +17,7 @@ function App() {
   );
   const Plan = React.lazy(() => import("./pages/Plan/Plan"));
   const Contact = React.lazy(() => import("./pages/Contact/Contact"));
+  const Rent = React.lazy(() => import("./pages/Rent/Rent"));
 
   return (
     <div className="App">
@@ -46,6 +47,7 @@ function App() {
                 />
                 <Route path="/plan" element={<Plan />} />
                 <Route path="/Contact" element={<Contact />} />
+                <Route path="/rent" element={<Rent />} />
               </Routes>
               <MyFooter />
             </BikesContextProvider>

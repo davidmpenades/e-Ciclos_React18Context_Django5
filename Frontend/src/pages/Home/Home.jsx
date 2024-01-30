@@ -32,22 +32,24 @@ export default function Home() {
             >
               <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
             </svg>
-            
+            <p>
             "En e-Move queremos que la movilidad sostenible sea una realidad
             para todos. Para tener unas ciudades más limpias y un aire más
             puro."
+            </p>
+            
           
             
           </Blockquote>
         </div>
       </div>
-      <section className="text-gray-400 bg-[#bbf7d0] body-font">
+      <section className="text-gray-400 bg-green-100">
         <div className="container px-5 py-24 mx-auto flex flex-wrap">
           <div className="flex w-full mb-20 flex-wrap">
             <h1
-              className="sm:text-3xl text-2xl font-medium title-font text-white lg:w-1/3 lg:mb-0 mb-4"
+              className="sm:text-3xl text-2xl font-medium text-white lg:w-1/3 lg:mb-0 mb-4"
               style={{
-                fontFamily: "CustomFont",
+                fontFamily: "1942 Report",
                 fontSize: "48px",
                 textShadow: "1px 2px 8px  gray",
               }}
