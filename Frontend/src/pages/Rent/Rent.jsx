@@ -173,7 +173,7 @@ const Rent = () => {
               </div>
             </div>
             <img
-              className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
+              className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 shadow-2xl"
               src={foto2}
               alt="step"
             ></img>

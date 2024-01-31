@@ -4,6 +4,9 @@ const StationService = {
   getAllStations() {
     return api().get("/api/stations/");
   },
+  getOneStation(id) {
+    return api().get(`/api/stations/${id}`);
+  },
   deleteStation(id) {
     return api().delete(`/api/stations/${id}`);
   },

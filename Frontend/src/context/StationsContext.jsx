@@ -11,7 +11,7 @@ export function StationsContextProvider({ children }) {
     StationService.getAllStations()
       .then(({data}) => {
         setStations(data);
-        const coords = data.map(station => ({ id: station.id, name:station.name, lat: station.latitude, lon: station.longitude, num:station.num_bikes }));      
+        const coords = data.map(station => ({ id: station.id, name:station.name, lat: station.latitude, lon: station.longitude, num:station.num_bikes, total_slots:station.total_slots }));      
         setCoordinates(coords);})
       .catch((error) => console.log(error));
   }, [setStations, setCoordinates]);

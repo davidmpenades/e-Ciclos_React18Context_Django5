@@ -6,6 +6,7 @@ import { Button } from "flowbite-react";
 import StationsList from "./Station/StationsList";
 import BikesList from "./Bikes/BikesList";
 import cartel from "../../assets/imgs/cartel.png";
+import SlotsList from "./Slots/SlotsList";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Dashboard = () => {
       case "Bikes":
         return <BikesList />;
       case "Slots":
-        return <h1>slots</h1>;
+        return <SlotsList />;
       case "Users":
         return <h1>users</h1>;
       default:
@@ -105,7 +106,7 @@ const Dashboard = () => {
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
 
-              <p>Parking</p>
+              <p>Anclajes</p>
             </a>
           </li>
           <li>

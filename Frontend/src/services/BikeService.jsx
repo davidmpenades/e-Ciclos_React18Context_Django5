@@ -11,7 +11,6 @@ const BikeService = {
     return api().post("/api/bikes/", addBike);
   },
   updateBikes(updateBike, id) {
-    console.log(updateBike, id);
     return api().put(`/api/bikes/${id}`, updateBike);
   },
 };
