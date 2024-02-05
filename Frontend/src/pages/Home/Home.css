@@ -1,6 +1,6 @@
 @font-face {
-    font-family: '1942 Report';
-    src: url('../../../assets/font/1942.ttf') format('truetype');    
+    font-family: 'toxt';
+    src: url('../../assets/font/Tox.ttf') format('truetype');    
   }
 
 .videoHeader{
@@ -19,14 +19,24 @@ video{
   left: 2%;
   right:2%; 
 }
+p{
+  font-family: 'toxt' !important;
+  color: rgb(163, 161, 161);
+  font-size: 5rem;
+  text-align: center;
+  line-height: 1.5;
+}
 .quoteText{
-  font-family: '1942 Report' !important;
-  font-size: 40px;
+  font-family: 'toxt' !important;
   color: white;
   text-align: center;
+  font-size: 3rem;
   text-shadow: 2px 2px 4px #000000;
   line-height: 1.5;
 }
 .quoteTextImage{
   color: grey;
+}
+section{
+  font-family: 'toxt' !important;
 }

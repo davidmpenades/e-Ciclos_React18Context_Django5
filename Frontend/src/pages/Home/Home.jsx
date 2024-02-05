@@ -13,18 +13,17 @@ import video from "../../assets/videos/videoHome.mp4";
 export default function Home() {
   const navigate = useNavigate();
 
-  
   return (
     <div>
-      <div className="videoHeader">
-        <video autoPlay loop muted>
+      <div className="videoHeader relative">
+        <video autoPlay loop muted className="w-full h-full object-cover">
           <source src={video} type="video/mp4" />
           Tu navegador no soporta el elemento de video.
         </video>
-        <div className="quote">
+        <div className="quote absolute bottom-0 left-0 right-0 p-6 text-center">
           <Blockquote className="quoteText">
             <svg
-              className="mb-4 h-10 w-20"
+              className="mb-4 h-10 w-20 text-gray-400 dark:text-gray-600"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -32,46 +31,54 @@ export default function Home() {
             >
               <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
             </svg>
-            <p>
-            "En e-Move queremos que la movilidad sostenible sea una realidad
-            para todos. Para tener unas ciudades más limpias y un aire más
-            puro."
+            <p className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white">
+              "En e-Move queremos que la movilidad sostenible sea una realidad
+              para todos. Para tener unas ciudades más limpias y un aire más
+              puro."
             </p>
-            
-          
-            
           </Blockquote>
         </div>
       </div>
+
       <section className="text-gray-400 bg-green-100">
         <div className="container px-5 py-24 mx-auto flex flex-wrap">
-          <div className="flex w-full mb-20 flex-wrap">
-            <h1
-              className="sm:text-3xl text-2xl font-medium text-white lg:w-1/3 lg:mb-0 mb-4"
-              style={{
-                fontFamily: "1942 Report",
-                fontSize: "48px",
-                textShadow: "1px 2px 8px  gray",
-              }}
-            >
-              Movilidad Sostenible
-            </h1>
-            <Blockquote className="quoteTextImage shadow-2xl rounded-b-xl p-6">
-              <svg
-                className="mb-4 h-10 w-20 text-gray-400 dark:text-gray-600 "
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 18 14"
+          <div className="flex w-full flex-wrap">
+            <div className="lg:w-1/2 w-full mb-20">
+              <h1
+                className="sm:text-3xl text-2xl font-medium text-white mb-4"
+                style={{
+                  fontFamily: "'toxt', sans-serif",
+                  fontSize: "4rem",
+                  textShadow: "1px 2px 8px gray",
+                  lineHeight: "1.2",
+                }}
               >
-                <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
-              </svg>
-              "Utilizando la movilidad eléctrica, mejoramos las ciudades y
-              cuidamos nuestro cuerpo y mente."
-            </Blockquote>
+                Movilidad Sostenible
+              </h1>
+            </div>
+            <div className="lg:w-1/2 w-full">
+              <blockquote className="quoteTextImage shadow-2xl rounded-b-xl p-6 sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
+                <svg
+                  className="mb-4 h-10 w-20 text-gray-400 dark:text-gray-600"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 18 14"
+                >
+                  <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
+                </svg>
+                <p className="text-lg" style={{ fontFamily: "toxt" , whiteSpace: "pre-line" }}>
+                  "En e-Move queremos que la movilidad sostenible sea una
+                  realidad para todos. 
+                  Para tener unas ciudades más limpias y un
+                  aire más puro."
+                </p>
+              </blockquote>
+            </div>
           </div>
+
           <div className="flex flex-wrap md:-m-2 -m-1">
-            <div className="flex flex-wrap w-1/2">
+            <div className="flex flex-wrap w-1/2 mt-10">
               <div className="md:p-2 p-1 w-1/2">
                 <img
                   alt="gallery"
@@ -91,11 +98,13 @@ export default function Home() {
                   alt="gallery"
                   className="w-full h-full object-cover object-center block rounded-lg md:shadow-2xl transition-transform duration-1000 transform hover:scale-110 cursor-pointer"
                   src={foto5}
-                  onClick={() => {navigate("/plan")} }
+                  onClick={() => {
+                    navigate("/plan");
+                  }}
                 />
               </div>
             </div>
-            <div className="flex flex-wrap w-1/2">
+            <div className="flex flex-wrap w-1/2 mt-10">
               <div className="md:p-2 p-1 w-full">
                 <img
                   alt="gallery"
@@ -114,7 +123,7 @@ export default function Home() {
                 <img
                   alt="gallery"
                   className="w-full object-cover h-full object-center block rounded-lg md:shadow-2xl"
-                  src={foto6}                  
+                  src={foto6}
                 />
               </div>
             </div>
@@ -126,13 +135,13 @@ export default function Home() {
           <div className="mx-auto max-w-3xl text-center m-20">
             <h1 className="bg-gradient-to-r rounded-xl from-green-500 via-blue-300 to-blue-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl shadow-2xl p-10">
               ¿Quieres empezar?
-              <span className="sm:block">
+              <span className="sm:block" style={{fontFamily:"1942 Report"}}>
                 ¿Estás preparado para una movilidad sana?
               </span>
             </h1>
 
-            <p className="mx-auto mt-9 max-w-xl sm:text-xl/relaxed mt-12">
-              Estamos encantados de que nos eligas como una forma sostenible de
+            <p className="mx-auto mt-9 max-w-xl text-lg sm:text-xl lg:text-2xl xl:text-3xl/relaxed mt-12">
+              Estamos encantados de que nos elijas como una forma sostenible de
               transporte urbano!
             </p>
 

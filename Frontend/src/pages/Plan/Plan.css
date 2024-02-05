@@ -1,4 +1,7 @@
 @font-face {
     font-family: 'CustomFont';
-    src: url('../../../assets/font/Type.ttf') format('truetype');    
+    src: url('../../assets/font/Tox.ttf') format('truetype');    
+  }
+  h1{
+    font-family: 'CustomFont' !important;
   }

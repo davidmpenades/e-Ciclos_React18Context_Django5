@@ -57,6 +57,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         # if we didn't decode these values.
         prefix = auth_header[0].decode('utf-8')
         token = auth_header[1].decode('utf-8')
+       
 
         if prefix.lower() != auth_header_prefix:
             # The auth header prefix is not what we expected. Do not attempt to
@@ -76,6 +77,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
 
         try:
             payload = jwt.decode(token, settings.SECRET_KEY)
+            
         except:
             msg = 'Invalid authentication. Could not decode token.'
             raise exceptions.AuthenticationFailed(msg)

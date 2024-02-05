@@ -2,9 +2,15 @@ import React from "react";
 import Context from "../../context/StationsContext";
 import Map from "../../component/Map/Map";
 import foto2 from "../../assets/imgs/Home/foto2.jpg";
-import icon from "../../assets/icons/pasos.svg"
+import icon from "../../assets/icons/pasos.svg";
+import bici from "../../assets/icons/bicicleta.png";
+import candado from "../../assets/icons/candado.png";
+import mapa from "../../assets/icons/mapa.png";
+import candadoA from "../../assets/icons/candado-abierto.png";
+import { useNavigate } from "react-router-dom";
 const Rent = () => {
   const { coordinates } = React.useContext(Context);
+  const navigate = useNavigate(); 
 
   return (
     <>
@@ -24,6 +30,7 @@ const Rent = () => {
 
             <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
               <button
+                onClick={() => navigate("/login")}
                 className="block rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring shadow-lg"
                 type="button"
               >
@@ -36,24 +43,15 @@ const Rent = () => {
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto flex flex-wrap">
           <div className="flex flex-wrap w-full">
-            <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
+            <div className="lg:w-1/2 md:w-full md:pr-10 md:py-6">
               <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
                 </div>
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                    dangerouslySetInnerHTML={{ __html: (`!!raw-loader!../../assets/icons/pasos.svg`).default }}
-                  >
-                  </svg>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-500 inline-flex items-center justify-center text-white relative z-10">
+                  <img src={icon} alt="Tu icono" className="w-5 h-5" />
                 </div>
+
                 <div className="flex-grow pl-4">
                   <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
                     Primer Paso
@@ -68,18 +66,8 @@ const Rent = () => {
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
                 </div>
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    
-                  </svg>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-500 inline-flex items-center justify-center text-white relative z-10">
+                  <img src={mapa} alt="Tu icono" className="w-5 h-5" />
                 </div>
                 <div className="flex-grow pl-4">
                   <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
@@ -95,19 +83,8 @@ const Rent = () => {
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
                 </div>
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="12" cy="5" r="3"></circle>
-                    <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
-                  </svg>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-500 inline-flex items-center justify-center text-white relative z-10">
+                  <img src={candadoA} alt="Tu icono" className="w-5 h-5" />
                 </div>
                 <div className="flex-grow pl-4">
                   <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
@@ -123,19 +100,12 @@ const Rent = () => {
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
                 </div>
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-500 inline-flex items-center justify-center text-white relative z-10">
+                  <img
+                    src={bici}
+                    alt="Tu icono"
                     className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                  />
                 </div>
                 <div className="flex-grow pl-4">
                   <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
@@ -147,19 +117,8 @@ const Rent = () => {
                 </div>
               </div>
               <div className="flex relative">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-                    <path d="M22 4L12 14.01l-3-3"></path>
-                  </svg>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-500 inline-flex items-center justify-center text-white relative z-10">
+                  <img src={candado} alt="Tu icono" className="w-5 h-5" />
                 </div>
                 <div className="flex-grow pl-4">
                   <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
@@ -172,21 +131,17 @@ const Rent = () => {
                 </div>
               </div>
             </div>
-            <img
-              className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 shadow-2xl"
-              src={foto2}
-              alt="step"
-            ></img>
+            <div className="lg:w-1/2 md:w-full object-cover object-center md:mt-0 mt-12 shadow-2xl">
+              <img src={foto2} alt="step" className="w-full h-full rounded-xl" />
+            </div>
           </div>
         </div>
-        <div
-          className="flex justify-center items-center bg-green-50">
-            <h1
-            className="font-bold text-gray-900 sm:text-5xl m-20"
-            >Elige una estación</h1>
-        <Map stations={coordinates} />
+        <div className="flex flex-col items-center bg-green-50">
+          <h1 className="font-bold text-gray-900 sm:text-5xl m-2 md:m-10 lg:m-10 text-center">
+            Elige una estación:
+          </h1>
+          <Map stations={coordinates} />
         </div>
-        
       </section>
     </>
   );

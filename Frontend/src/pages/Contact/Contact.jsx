@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { Toaster, toast } from "sonner";
-import contact from "../../assets/imgs/contact.jpg";
+import contact from "../../assets/imgs/contact.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function Contact() {
@@ -57,7 +57,7 @@ export default function Contact() {
   return (
     <body className="text-white font-sans" style={divStyle}>
       <div className="min-h-screen flex items-center justify-center">
-        <div className=" p-8 rounded-lg w-full md:w-1/2 lg:w-1/3 border-4 backdrop-blur-md">
+        <div className=" p-8 rounded-lg w-full md:w-1/2 lg:w-1/3 backdrop-blur-md">
           <h2 className="text-3xl font-semibold mb-6 text-center text:shadow-lg">
             Contacta con nosotros
           </h2>

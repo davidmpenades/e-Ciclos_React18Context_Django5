@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Users
-# from .models import Profile
+from .models import Profile
 # from emove.app.rent.models import Rent
 # from emove.app.bikes.models import Bikes
 
@@ -48,6 +48,7 @@ class userSerializer(serializers.ModelSerializer):
         return {
             'user': {
                 'id': user.id,
+                'uuid': user.uuid,
                 'username': user.username,
                 'email': user.email,
                 'type': user.type
@@ -88,94 +89,94 @@ class userSerializer(serializers.ModelSerializer):
             'token': user.token
         }
 
-# class ProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
 
-#     class Meta:
-#         # model = Profile
-#         fields = ['id', 'user', 'name', 'lastsnames', 'image']
+    class Meta:
+        model = Profile
+        fields = ['id', 'user', 'name', 'lastsnames', 'image']
 
-#     def to_Profile(instance):
-#         return {
-#             "id": instance.id,
-#             "user": instance.user,
-#             "name": instance.name,
-#             "lastsnames": instance.lastsnames,
-#             "image": instance.image,
-#         }
+    def to_Profile(instance):
+        return {
+            "id": instance.id,
+            "user": instance.user,
+            "name": instance.name,
+            "lastsnames": instance.lastsnames,
+            "image": instance.image,
+        }
 
-#     def create(context):
-#         user_id = context['id']
-#         user = Users.objects.get(pk=user_id)
+    def create(context):
+        user_id = context['id']
+        user = Users.objects.get(pk=user_id)
 
-#         if user is None:
-#             raise serializers.ValidationError('User not found')
+        if user is None:
+            raise serializers.ValidationError('User not found')
        
-        # profile = Profile.objects.create(
-        #     user_id=user_id, 
-        #     name="", 
-        #     lastsnames="",
-        #     image="https://avatars.dicebear.com/api/adventurer/" + context['username'] + ".svg")
+        profile = Profile.objects.create(
+            user_id=user_id, 
+            name="", 
+            lastsnames="",
+            image="https://avatars.dicebear.com/api/adventurer/" + context['username'] + ".svg")
 
-        # profile.save()
-        # return profile
+        profile.save()
+        return profile
 
-    # def update(current_user, user_context, profile_context):
-    #     user_id = profile_context['id']
-    #     user = Users.objects.get(pk=user_id)
+    def update(current_user, user_context, profile_context):
+        user_id = profile_context['id']
+        user = Users.objects.get(pk=user_id)
 
-    #     newName = profile_context['name']
-    #     newLastsnames = profile_context['lastsnames']
-    #     newImage = profile_context['image']
+        newName = profile_context['name']
+        newLastsnames = profile_context['lastsnames']
+        newImage = profile_context['image']
 
-    #     newUsername = user_context['username']
-    #     newEmail = user_context['email']
+        newUsername = user_context['username']
+        newEmail = user_context['email']
 
-    #     if user is None:
-    #         raise serializers.ValidationError('User not found')
+        if user is None:
+            raise serializers.ValidationError('User not found')
 
-    #     if user != current_user:
-    #         raise serializers.ValidationError('Invalid access')
+        if user != current_user:
+            raise serializers.ValidationError('Invalid access')
 
-    #     if newUsername != user.username: 
-    #         username_exist = len(Users.objects.filter(username=newUsername))
-    #         print(username_exist)
-    #         if (username_exist > 0):
-    #             raise serializers.ValidationError('*Username already exists.')
-    #         Users.objects.filter(username=current_user).update(username = newUsername)
+        if newUsername != user.username: 
+            username_exist = len(Users.objects.filter(username=newUsername))
+            print(username_exist)
+            if (username_exist > 0):
+                raise serializers.ValidationError('*Username already exists.')
+            Users.objects.filter(username=current_user).update(username = newUsername)
 
-    #     if newEmail != user.email: 
-    #         email_exist = len(Users.objects.filter(email=newEmail))
-    #         print(email_exist)
-    #         if (email_exist > 0):
-    #             raise serializers.ValidationError('*Email already exists.')
-    #         Users.objects.filter(username=current_user).update(email = newEmail)
+        if newEmail != user.email: 
+            email_exist = len(Users.objects.filter(email=newEmail))
+            print(email_exist)
+            if (email_exist > 0):
+                raise serializers.ValidationError('*Email already exists.')
+            Users.objects.filter(username=current_user).update(email = newEmail)
 
-    #     newUser = Users.objects.get(username=newUsername)
+        newUser = Users.objects.get(username=newUsername)
         
-        # Profile.objects.filter(user_id=user_id).update(
-        #     name = newName,
-        #     lastsnames = newLastsnames,
-        #     image = newImage,
-        # )
+        Profile.objects.filter(user_id=user_id).update(
+            name = newName,
+            lastsnames = newLastsnames,
+            image = newImage,
+        )
 
-        # profile = Profile.objects.get(user_id=user_id)
+        profile = Profile.objects.get(user_id=user_id)
 
-        # return {
-        #     'user': {
-        #         'id': newUser.id,
-        #         'username': newUser.username,
-        #         'email': newUser.email,
-        #         'type': newUser.type
-        #     },
-        #     'profile': {
-        #         'id': profile.id,
-        #         'name': profile.name,
-        #         'lastsnames': profile.lastsnames,
-        #         'image': profile.image,
-        #     },
-        #     'token': newUser.token,
-        #     'ref_token': newUser.ref_token,
-        # }
+        return {
+            'user': {
+                'id': newUser.id,
+                'username': newUser.username,
+                'email': newUser.email,
+                'type': newUser.type
+            },
+            'profile': {
+                'id': profile.id,
+                'name': profile.name,
+                'lastsnames': profile.lastsnames,
+                'image': profile.image,
+            },
+            'token': newUser.token,
+            'ref_token': newUser.ref_token,
+        }
 
     # def getStats(current_user, id):
     #     user = User.objects.get(pk=id)

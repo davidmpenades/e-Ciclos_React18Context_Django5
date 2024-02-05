@@ -8,6 +8,7 @@ import SpinnerLoading from "./component/SpinnerLoading/SpinnerLoading";
 import { StationsContextProvider } from "./context/StationsContext";
 import { BikesContextProvider } from "./context/BikesContext";
 import { SlotsContextProvider } from "./context/SlotsContext";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   const Home = React.lazy(() => import("./pages/Home/Home"));
@@ -22,6 +23,7 @@ function App() {
     import("./pages/Client/Station/StationDetail")
   );
   const SlotCard = React.lazy(() => import("./component/Rent/SlotCard"));
+  const Login = React.lazy(() => import("./pages/Login/Login"));
 
   return (
     <div className="App">
@@ -30,33 +32,36 @@ function App() {
           <StationsContextProvider>
             <BikesContextProvider>
               <SlotsContextProvider>
-                <Header />
-                <ToastContainer
-                  position="top-center"
-                  autoClose={2000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme="colored"
-                />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route
-                    path="/dashboard/stationsList"
-                    element={<StationsList />}
+                <AuthContextProvider>
+                  <Header />
+                  <ToastContainer
+                    position="top-center"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
                   />
-                  <Route path="/plan" element={<Plan />} />
-                  <Route path="/Contact" element={<Contact />} />
-                  <Route path="/rent" element={<Rent />} />
-                  <Route path="/StationDetail" element={<StationDetail />} />
-                  <Route path="/SlotCard" element={<SlotCard />} />
-                </Routes>
-                <MyFooter />
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route
+                      path="/dashboard/stationsList"
+                      element={<StationsList />}
+                    />
+                    <Route path="/plan" element={<Plan />} />
+                    <Route path="/Contact" element={<Contact />} />
+                    <Route path="/rent" element={<Rent />} />
+                    <Route path="/StationDetail" element={<StationDetail />} />
+                    <Route path="/SlotCard" element={<SlotCard />} />
+                    <Route path="/Login" element={<Login />} />
+                  </Routes>
+                  <MyFooter />
+                </AuthContextProvider>
               </SlotsContextProvider>
             </BikesContextProvider>
           </StationsContextProvider>

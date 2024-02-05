@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import "./Header.css";
 import logo from "../../assets/imgs/logo2.png";
 import { useNavigate, useLocation } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 
 export default function Header() {
     const navigate = useNavigate();
     const location = useLocation();
+    const { user, isAuth, isAdmin, logout } = useContext(AuthContext);
     const [activeLink, setActiveLink] = useState("/");
+    console.log(user);
 
     const redirect = {
         dashboard: () => {
@@ -26,6 +29,10 @@ export default function Header() {
             navigate("/Contact");
             setActiveLink("/Contact");
         },
+        login: () => {
+            navigate("/Login");
+            setActiveLink("/Login");
+        }
     };
 
     useEffect(() => {
@@ -37,8 +44,8 @@ export default function Header() {
             <Navbar.Brand href="/">
                 <img src={logo} className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
             </Navbar.Brand>
-            <div className="flex md:order-2">
-                <Dropdown
+            {isAuth && (<div className="flex md:order-2">
+                 <Dropdown
                     arrowIcon={false}
                     inline
                     label={
@@ -56,8 +63,9 @@ export default function Header() {
                     <Dropdown.Item>Logout</Dropdown.Item>
                 </Dropdown>
                 <Navbar.Toggle />
-            </div>
+            </div>)}
             <Navbar.Collapse>
+            
                 <Navbar.Link
                     href="/"
                     active={activeLink === "/"}
@@ -86,6 +94,21 @@ export default function Header() {
                 >
                     Contacto
                 </Navbar.Link>
+                {!isAuth && (<Navbar.Link
+                    href=""
+                    active={activeLink === "/Login"}
+                    onClick={redirect.login}
+                >
+                    Registro/Entrar
+                </Navbar.Link>)}
+                {isAuth && (<Navbar.Link
+                    href=""
+                    active={activeLink === "/"}
+                    onClick={logout}
+                >
+                    Salir
+                </Navbar.Link>)}
+           
             </Navbar.Collapse>
         </Navbar>
     );
