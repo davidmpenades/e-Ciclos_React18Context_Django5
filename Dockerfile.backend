@@ -1,0 +1,22 @@
+# Primera etapa: Construir la imagen con las dependencias
+FROM python:3 as builder
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip && \
+    pip wheel --no-cache-dir --no-deps --wheel-dir /wheels -r requirements.txt
+
+# Segunda etapa: Crear la imagen final
+FROM python:3
+
+WORKDIR /app
+
+COPY --from=builder /wheels /wheels
+
+COPY . .
+
+RUN pip install --no-cache /wheels/*
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

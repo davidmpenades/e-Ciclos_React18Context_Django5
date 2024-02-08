@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    depends_on:
+      - backend
+    volumes:
+      - ./postgresql:/docker-entrypoint-initdb.d
+    command: ["postgres", "-c", "max_connections=200"]
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: backend_container
+    depends_on:
+      - postgres
