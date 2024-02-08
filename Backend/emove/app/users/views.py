@@ -4,11 +4,10 @@ from .serializers import userSerializer
 from .models import Users, Profile
 from .serializers import ProfileSerializer
 from emove.app.bikes.serializers import BikesSerializer
-from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser)
+from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from emove.app.core.permissions import IsAdmin
 
 class UserView(viewsets.GenericViewSet):
-    permission_classes = (AllowAny,)
     def register(self, request):
         data = request.data
 

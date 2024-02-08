@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Map = ({ stations }) => {
   const navigate = useNavigate();
+
+  console.log("Map");
  
   return (
     <MapContainer

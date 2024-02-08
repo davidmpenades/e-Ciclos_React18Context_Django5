@@ -14,6 +14,8 @@ export default function StationCard() {
   const [filteredSlots, setFilteredSlots] = useState([]);
   const [filteredStation, setFilteredStation] = useState(null);
 
+  console.log("SlotCard");
+
   useEffect(() => {
     const filteredSlotsResult = slots
       .filter((slot) => slot.station_id === stationId)

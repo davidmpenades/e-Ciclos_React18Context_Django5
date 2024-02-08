@@ -4,6 +4,7 @@ import SlotsListAdmin from "../../../component/Admin/Slots/SlotsListAdmin";
 
 export default function SlotsList() {
     const { slots } = useSlots()
+    console.log("SlotList");
     return(
         <>
         <table className="w-full border-collapse border border-gray-300">

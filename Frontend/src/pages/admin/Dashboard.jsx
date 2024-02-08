@@ -47,7 +47,7 @@ const Dashboard = () => {
           <li>
             <a onClick={() => handleSelectItem("Dashboard")}>
               <svg
-                className="h-6 w-6 text-black"
+                className="dash h-6 w-6 text-black"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -62,7 +62,7 @@ const Dashboard = () => {
           <li>
             <a onClick={() => handleSelectItem("Stations")}>
               <svg
-                className="h-6 w-6 text-black"
+                className="dash h-6 w-6 text-black"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -80,7 +80,7 @@ const Dashboard = () => {
           <li>
             <a onClick={() => handleSelectItem("Bikes")}>
               <svg
-                className="h-6 w-6 text-black"
+                className="dash h-6 w-6 text-black"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"

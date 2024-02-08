@@ -6,8 +6,16 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 from .models import Slots
 from .serializers import SlotsSerializer
+from rest_framework.permissions import (AllowAny)
+from emove.app.core.permissions import IsAdmin
 
 @api_view(['GET', 'POST', 'DELETE'])
+def get_permissions(self):
+    if self.request.method == 'GET':
+        self.permission_classes = [AllowAny]
+    else:
+        self.permission_classes = [IsAdmin]
+    return super(slots_list, self).get_permissions()
 def slots_list(request):
     try:
         if request.method == 'GET':
@@ -39,6 +47,13 @@ def slots_list(request):
         return JsonResponse({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET', 'PUT', 'DELETE'])
+
+def get_permissions(self):
+    if self.request.method == 'GET':
+        self.permission_classes = [AllowAny]
+    else:
+        self.permission_classes = [IsAdmin]
+    return super(slots_detail, self).get_permissions()
 def slots_detail(request, pk):
     
     try: 

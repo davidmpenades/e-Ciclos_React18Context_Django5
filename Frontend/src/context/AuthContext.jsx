@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import AuthService from "../services/AuthService";
 import JwtService from "../services/JWTService";
-import JWTService from "../services/JWTService";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Context = React.createContext({});
 
@@ -15,30 +16,31 @@ export function AuthContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
+  const notifyLogout = () => toast.warning("has salido de tu cuenta!");
+  console.log(user.type);
+
   useEffect(() => {
-    console.log(token);
     if (token) {
       AuthService.getUser()
         .then(({ data, status }) => {
-          console.log(data);
           if (status === 200) {
             setToken(data.token);
             setUser(data.user);
             setIsAuth(true);
             setIsAdmin(data.user.type === "admin");
-            navigate("/");
+            // navigate("/");
           }
         })
         .catch(({ error }) => {
           console.error(error);
-          if (JWTService.getRefreshToken()) {
+          if (JwtService.getRefreshToken()) {
             refresh_token();
           } else {
-            logout();
+            setTimeout(() => {logout()}, 1500);
           }
         });
     }
-  }, [token]);
+  }, []);
 
   const refresh_token = async () => {
     JwtService.destroyToken();
@@ -46,7 +48,7 @@ export function AuthContextProvider({ children }) {
       .then(({ data }) => {
         setToken(data.token);
         JwtService.saveToken(data.token);
-        navigate("/");
+        // navigate("/");
       })
       .catch(({}) => {
         logout();
@@ -60,8 +62,8 @@ export function AuthContextProvider({ children }) {
     setToken(false);
     setIsAuth(false);
     setIsAdmin(false);
-    toast.success('Loged out successfully');
-    navigate('/home');
+    notifyLogout();
+    navigate('/');
 }, []);
 
   return (
