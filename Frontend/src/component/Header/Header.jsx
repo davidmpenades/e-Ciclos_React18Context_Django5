@@ -140,7 +140,7 @@ export default function Header() {
   const redirect = {
         dashboard: () => {
           navigate("/dashboard");
-          setActiveLink("/dashboard");
+          // setActiveLink("/dashboard");
         }
       }
   return (

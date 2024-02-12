@@ -26,6 +26,7 @@ export default function ModalAdd({
     status: station.slug != "" ? station.status : "",
     img_st: station.slug != "" ? station.img_st : "",
   });
+  console.log(formData);
 
   const TypeModal =
     modalType === "add" ? (

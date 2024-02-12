@@ -4,6 +4,7 @@ import { useStations } from "../../hooks/useStations";
 import { useLocation } from "react-router-dom";
 import { Button } from "flowbite-react";
 import foto from "../../assets/imgs/Home/foto2.jpg";
+import qr from "../../assets/icons/qr.png";
 
 export default function StationCard() {
   const { slots } = useSlots();
@@ -14,7 +15,7 @@ export default function StationCard() {
   const [filteredSlots, setFilteredSlots] = useState([]);
   const [filteredStation, setFilteredStation] = useState(null);
 
-  console.log("SlotCard");
+  console.log(filteredSlots);
 
   useEffect(() => {
     const filteredSlotsResult = slots
@@ -75,12 +76,17 @@ export default function StationCard() {
               </p>
             </div>
             <div className="container flex-row mt-4 align-center">
+              {slot.status !== "vacant" && (
               <Button className="bg-green-500 text-white m-2 p-2 rounded hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
-                Alquilar Bicicleta
+                <img src={qr} alt="qr" style={{width:'38px'}} />
+                Alquila el qr para desbloquear bicicleta
+              </Button>)}
+              {slot.status !== "in_use" && (
+                <Button className="bg-blue-500 text-white m-2 p-2 rounded flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
+                <img src={qr} alt="qr" style={{width:'38px'}} />
+                <span>Escanea el qr para dejar biciclera</span>
               </Button>
-              <Button className="bg-blue-500 text-white m-2 p-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
-                Dejar Bicicleta
-              </Button>
+              )}
               <Button className="bg-red-500 text-white m-2 p-2 rounded hover:bg-red-900 focus:outline-none focus:shadow-outline-green active:bg-green-800">
                 Incidencia
               </Button>
