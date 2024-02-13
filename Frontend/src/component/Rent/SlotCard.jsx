@@ -11,11 +11,8 @@ export default function StationCard() {
   const { stations } = useStations();
   const location = useLocation();
   const { stationId } = location.state;
-
   const [filteredSlots, setFilteredSlots] = useState([]);
   const [filteredStation, setFilteredStation] = useState(null);
-
-  console.log(filteredSlots);
 
   useEffect(() => {
     const filteredSlotsResult = slots
@@ -79,7 +76,7 @@ export default function StationCard() {
               {slot.status !== "vacant" && (
               <Button className="bg-green-500 text-white m-2 p-2 rounded hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
                 <img src={qr} alt="qr" style={{width:'38px'}} />
-                Alquila el qr para desbloquear bicicleta
+                Escanea el qr para desbloquear bicicleta
               </Button>)}
               {slot.status !== "in_use" && (
                 <Button className="bg-blue-500 text-white m-2 p-2 rounded flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">

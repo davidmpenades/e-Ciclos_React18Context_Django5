@@ -5,6 +5,7 @@ import logo from "../../assets/imgs/logo.png";
 import { Button } from "flowbite-react";
 import StationsList from "./Station/StationsList";
 import BikesList from "./Bikes/BikesList";
+import UsersList from "./Users/UsersList"
 import cartel from "../../assets/imgs/cartel.png";
 import SlotsList from "./Slots/SlotsList";
 
@@ -28,7 +29,7 @@ const Dashboard = () => {
       case "Slots":
         return <SlotsList />;
       case "Users":
-        return <h1>users</h1>;
+        return <UsersList />;
       default:
         return null;
     }

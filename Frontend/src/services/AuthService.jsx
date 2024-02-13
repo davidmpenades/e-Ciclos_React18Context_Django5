@@ -7,6 +7,9 @@ const AuthService = {
   getUser() {
     return api().get("/api/user");
   },
+  getAllUsers(){
+    return api().get("/api/users/")
+  },
   Register(data) {
     console.log(data);
     return api().post("/api/register/", data);

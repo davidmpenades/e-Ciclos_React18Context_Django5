@@ -26,3 +26,16 @@ class RentView(viewsets.GenericViewSet):
         serializer_context = {'username': username, 'slot_id': data['end_slot'], 'bike_id': data['bike_id']}
         serializer = RentSerializer.backBike(context=serializer_context)
         return Response(RentSerializer.to_rent(serializer))
+    
+class RentAdminView(viewsets.GenericViewSet):
+    permission_classes = [IsAdmin]
+
+    def getAllRents(self, request):
+        data = Rent.objects.all()
+        serializer = RentSerializer(data, many=True)
+        return Response(serializer.data)
+
+    def deleteRent(self, request, id):
+        rent = Rent.objects.get(id=id)
+        rent.delete()
+        return Response({'data': 'Rent deleted successfully'})

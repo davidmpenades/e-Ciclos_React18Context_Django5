@@ -18,7 +18,7 @@ const Rent = () => {
 
   return (
     <>
-      {!user && user.username === "" ? (
+      {!user.username ? (
         <header className="bg-green-50">
           <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
             <div className="sm:flex sm:items-center sm:justify-between">
@@ -63,7 +63,7 @@ const Rent = () => {
         </h1>
       )}
       <section className="text-gray-600 body-font">
-        {!user && user.username === "" ? (
+        {!user.username ? (
           <div className="container px-5 py-24 mx-auto flex flex-wrap">
             <div className="flex flex-wrap w-full">
               <div className="lg:w-1/2 md:w-full md:pr-10 md:py-6">
