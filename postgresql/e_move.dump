@@ -1,0 +1,1 @@
+pg_dump -U david -d e-Move -h localhost -Fc -f e_move_data.dump

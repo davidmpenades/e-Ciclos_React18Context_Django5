@@ -2,18 +2,36 @@ version: '3'
 
 services:
   postgres:
-    image: postgres:latest
+    image: postgres
     container_name: postgres_container
-    depends_on:
-      - backend
     volumes:
-      - ./postgresql:/docker-entrypoint-initdb.d
-    command: ["postgres", "-c", "max_connections=200"]
+      - postgres_container:/var/lib/postgresql/data
+      - ./postgresql/db_init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5434:5432"
+    environment:
+      PG_USER: david
+      PG_PASSWORD: 1234
+      
 
   backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
     container_name: backend_container
+    environment:
+      - PG_USER=david
+      - PG_PASSWORD=1234
+      - PG_HOST=postgres_container
+      - PG_PORT=5432
+      - PG_DB=emove
+    volumes:
+      - ./Backend:/app
     depends_on:
       - postgres
+    ports:
+      - "8001:8000"
+
+volumes:
+  postgres_container:
+
