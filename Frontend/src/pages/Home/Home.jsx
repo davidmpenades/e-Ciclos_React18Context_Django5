@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Blockquote } from "flowbite-react";
 import "./Home.css";
-import foto1 from "../../assets/imgs/Home/foto1.jpg";
-import foto2 from "../../assets/imgs/Home/foto2.jpg";
-import foto3 from "../../assets/imgs/Home/foto3.jpg";
-import foto4 from "../../assets/imgs/Home/foto4.jpg";
-import foto5 from "../../assets/imgs/Home/foto5.jpg";
-import foto6 from "../../assets/imgs/Home/foto6.jpg";
+import foto1 from "../../assets/imgs/Home/foto1.webp";
+import foto2 from "../../assets/imgs/Home/foto2.webp";
+import foto3 from "../../assets/imgs/Home/foto3.webp";
+import foto4 from "../../assets/imgs/Home/foto4.webp";
+import foto5 from "../../assets/imgs/Home/foto5.webp";
+import foto6 from "../../assets/imgs/Home/foto6.webp";
 import video from "../../assets/videos/videoHome.mp4";
 
 export default function Home() {

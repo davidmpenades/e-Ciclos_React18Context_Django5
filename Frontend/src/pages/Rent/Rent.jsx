@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Context from "../../context/StationsContext";
 import AuthContext from "../../context/AuthContext";
 import Map from "../../component/Map/Map";
-import foto2 from "../../assets/imgs/Home/foto2.jpg";
+import foto2 from "../../assets/imgs/Home/foto2.webp";
 import icon from "../../assets/icons/pasos.svg";
 import bici from "../../assets/icons/bicicleta.png";
 import candado from "../../assets/icons/candado.png";

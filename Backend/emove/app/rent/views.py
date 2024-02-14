@@ -21,7 +21,6 @@ class RentView(viewsets.GenericViewSet):
         return Response(RentSerializer.to_rent(serializer))
     
     def backBike(self, request):
-        print(request)
         data = request.data['bike']
         username = request.user
         serializer_context = {'username': username, 'slot_id': data['end_slot'], 'bike_id': data['bike_id']}

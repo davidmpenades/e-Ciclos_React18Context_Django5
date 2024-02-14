@@ -1,0 +1,66 @@
+# FROM python:3  
+# # # Set unbuffered output for python 
+# ENV PYTHONUNBUFFERED 1  
+# # # Install PostgreSQL client 
+#  RUN apt-get update && apt-get install -y postgresql-client  
+# #Create app directory 
+# WORKDIR /app  
+# #Install app dependencies 
+# COPY ./Backend/requirements.txt .   
+# RUN pip install -r requirements.txt  
+# # Bundle app source 
+# COPY ./Backend .    
+# #Copy wait-for-postgres.sh script 
+# COPY ./Backend/wait-for-postgres.sh /app/wait-for-postgres.sh 
+# RUN chmod +x /app/wait-for-postgres.sh   
+#  #Set executable permissions for scripts 
+# RUN chmod +x /app/django.sh  
+#  # # Expose port 
+# EXPOSE 8000 
+
+# ENTRYPOINT [ "/app/django.sh" ]
+
+# Primera etapa: construir la aplicación
+FROM python:3 AS builder
+
+# Set unbuffered output for python
+ENV PYTHONUNBUFFERED 1
+
+# Install PostgreSQL client and required Perl modules
+RUN apt-get update && apt-get install -y postgresql-client libdbd-pg-perl
+
+# Create app directory
+WORKDIR /app
+
+# Install app dependencies
+COPY ./Backend/requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Bundle app source
+COPY ./Backend .
+
+# Segunda etapa: crear la imagen final
+FROM python:3-slim
+
+COPY --from=builder /app/requirements.txt /app/requirements.txt
+
+# Install Django y otras dependencias necesarias
+RUN apt-get update && apt-get install -y postgresql-client libdbd-pg-perl \
+    && pip install --no-cache-dir -r /app/requirements.txt
+
+# Create app directory
+WORKDIR /app
+
+# Copia solo los archivos necesarios de la etapa de construcción
+COPY --from=builder /app /app
+
+# Set executable permissions for scripts
+RUN chmod +x /app/django.sh
+RUN chmod +x /app/wait-for-postgres.sh
+
+# Expose port
+EXPOSE 8000
+
+# entrypoint para ejecutar el archivo django.sh
+ENTRYPOINT ["/app/django.sh"]

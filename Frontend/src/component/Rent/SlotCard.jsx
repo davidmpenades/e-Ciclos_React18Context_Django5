@@ -7,9 +7,9 @@ import AuthContext from "../../context/AuthContext";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { Button } from "flowbite-react";
-import foto from "../../assets/imgs/Home/foto2.jpg";
 import qr from "../../assets/icons/qr.png";
 import { toast } from "react-toastify";
+import foto from "../../assets/imgs/Home/foto2.webp";
 
 export default function StationCard() {
   const { slots } = useSlots();
