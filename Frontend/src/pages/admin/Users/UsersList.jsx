@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import UsersListAdmin from "../../../component/Admin/Users/UsersListAdmin";
 
 const UsersList = () => {
   const { users, useAllUsers } = useAuth();
   console.log(users);
+
+  useEffect(() => {
+    useAllUsers();
+  }, []);
+
   return (
     <div>
       <div className="header flex items-center justify-between mb-3 mr-6">

@@ -17,7 +17,6 @@ export function AuthContextProvider({ children }) {
   const navigate = useNavigate();
 
   const notifyLogout = () => toast.warning("has salido de tu cuenta!");
-  console.log(user.type);
 
   useEffect(() => {
     if (token) {

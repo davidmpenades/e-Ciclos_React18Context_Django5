@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useSlots } from "../../hooks/useSlots";
 import { useStations } from "../../hooks/useStations";
 import { useLocation } from "react-router-dom";
+import { useRent } from "../../hooks/useRent";
+import AuthContext from "../../context/AuthContext";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 import { Button } from "flowbite-react";
 import foto from "../../assets/imgs/Home/foto2.jpg";
 import qr from "../../assets/icons/qr.png";
+import { toast } from "react-toastify";
 
 export default function StationCard() {
   const { slots } = useSlots();
@@ -13,6 +18,10 @@ export default function StationCard() {
   const { stationId } = location.state;
   const [filteredSlots, setFilteredSlots] = useState([]);
   const [filteredStation, setFilteredStation] = useState(null);
+  const { useRentBike } = useRent();
+  const { getOneRent } = useRent();
+  const { isAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const filteredSlotsResult = slots
@@ -25,6 +34,43 @@ export default function StationCard() {
     setFilteredSlots(filteredSlotsResult);
     setFilteredStation(filteredStationResult);
   }, [stationId, slots, stations]);
+
+  const getCurrentDateTime = () => {
+    const currentDate = moment().format("YYYY-MM-DD");
+    const currentTime = moment().format("HH:mm:ss");
+    return currentDate + " " + currentTime;
+  };
+
+  const handlerRent = (slot) => {
+    if (!isAuth) {
+      return () => {
+        navigate("/login");
+        toast.error("Debes iniciar sesión para alquilar una bicicleta");
+      };
+    } else if (getOneRent){
+      return () => {
+        toast.error("Ya tienes una bicicleta alquilada. No puedes alquilar otra.");
+      }
+    }    
+    else {
+     
+        return () => {
+          console.log("renting", slot);
+          const initialDate = getCurrentDateTime();
+          const rentData = {
+            id: slot.id,
+            bike: slot.bike_id,
+            initial_slot: slot.id,
+            end_slot: '',
+            initial_date: initialDate,
+            end_date: '',
+          };
+          useRentBike(rentData);
+          navigate('/rent')
+        };
+      
+    }
+  };
 
   return (
     <>
@@ -74,15 +120,19 @@ export default function StationCard() {
             </div>
             <div className="container flex-row mt-4 align-center">
               {slot.status !== "vacant" && (
-              <Button className="bg-green-500 text-white m-2 p-2 rounded hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
-                <img src={qr} alt="qr" style={{width:'38px'}} />
-                Escanea el qr para desbloquear bicicleta
-              </Button>)}
+                <Button
+                  onClick={handlerRent(slot)}
+                  className="bg-blue-500 text-white m-2 p-2 rounded hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800"
+                >
+                  <img src={qr} alt="qr" style={{ width: "38px" }} />
+                  Escanea el qr para desbloquear bicicleta
+                </Button>
+              )}
               {slot.status !== "in_use" && (
-                <Button className="bg-blue-500 text-white m-2 p-2 rounded flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
-                <img src={qr} alt="qr" style={{width:'38px'}} />
-                <span>Escanea el qr para dejar biciclera</span>
-              </Button>
+                <Button className="bg-green-500 text-white m-2 p-2 rounded flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
+                  <img src={qr} alt="qr" style={{ width: "38px" }} />
+                  <span>Escanea el qr para dejar biciclera</span>
+                </Button>
               )}
               <Button className="bg-red-500 text-white m-2 p-2 rounded hover:bg-red-900 focus:outline-none focus:shadow-outline-green active:bg-green-800">
                 Incidencia

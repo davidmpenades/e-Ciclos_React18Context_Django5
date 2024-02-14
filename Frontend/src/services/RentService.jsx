@@ -1,9 +1,21 @@
-import api from "./api"
+import api from "./api";
 
-const RentService= {
-    getOneRent() {
-        return api().get('/rent/')
-    }
-}
+const RentService = {
+  getOneRent() {
+    return api().get("/api/rent/");
+  },
+  getAllRents() {
+    return api().get("/api/rents/");
+  },
+  rentBike(slot){
+    console.log(slot);
+    return api().post(`/api/rent/${slot.id}`)
+  },
+  backRent(slot){
+    console.log(slot);
+    return api().put(`/api/rent/`)
 
-export default RentService
+  }
+};
+
+export default RentService;

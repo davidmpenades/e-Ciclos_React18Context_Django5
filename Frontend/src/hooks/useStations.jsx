@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 export function useStations() {
   const { stations, setStations } = useContext(StationsContext);
   const [oneStation, setOneStation] = useState({});
-console.log(stations);
 
   const notifySuccessDelete = () =>
     toast.error("Station deleted successfully!");

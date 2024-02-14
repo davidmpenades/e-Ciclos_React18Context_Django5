@@ -10,8 +10,6 @@ export default function StationCard() {
   const { stations } = useStations();
   const navigate = useNavigate();
 
-  console.log("StationCard");
-
   return (
     <>
       {stations

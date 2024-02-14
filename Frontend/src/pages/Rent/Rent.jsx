@@ -14,7 +14,6 @@ const Rent = () => {
   const { coordinates } = React.useContext(Context);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(user);
 
   return (
     <>

@@ -12,15 +12,16 @@ export function useAuth() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [errorMSG, setErrorMSG] = useState("");
   const Navigate = useNavigate();
-  const [allUsers, setAllUsers] = useState([]);
+  const [users, setUsers] = useState({});
   
   const useAllUsers = useCallback(() => {
     AuthService.getAllUsers()
       .then(({ data }) => {
-        setAllUsers(data);
+        setUsers(data);
       })
       .catch((e) => console.error(e));
-  }, [allUsers]);
+  }, [users]);
+
   const useLogin = useCallback(
     (data) => {
       AuthService.Login(data)
@@ -46,6 +47,7 @@ export function useAuth() {
     },
     [setUser]
   );
+
   const useRegister = useCallback(
     (data) => {
       AuthService.Register(data)
@@ -73,5 +75,5 @@ export function useAuth() {
     },
     [setUser]
   );
-  return { useAuth, useLogin, useRegister, user, setUser, errorMSG, isCorrect, useAllUsers };
+  return { useAuth, useLogin, useRegister, user, setUser,users, errorMSG, isCorrect, useAllUsers };
 }

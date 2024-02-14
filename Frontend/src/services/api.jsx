@@ -5,7 +5,6 @@ const Axios = () => {
     let api = null;   
 
     if (JwtService.getToken('token')) {
-        console.log('Token found');
         api = axios.create({
             baseURL: 'http://0.0.0.0:8000',
             headers: {
