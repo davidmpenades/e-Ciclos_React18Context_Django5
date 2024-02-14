@@ -1,5 +1,6 @@
 import axios from 'axios';
 import JwtService from './JWTService';
+import secrets from '../../secret';
 
 const Axios = () => {
     let api = null;   
@@ -7,7 +8,7 @@ const Axios = () => {
     if (JwtService.getToken('token')) {
         console.log('Token found');
         api = axios.create({
-            baseURL: 'http://0.0.0.0:8000',
+            baseURL: secrets.URL_DJANGO_REST_API,
             headers: {
                 "Content-type": "application/json",
                 "Authorization": `Bearer ${JwtService.getToken()}`
@@ -15,7 +16,7 @@ const Axios = () => {
         });
     } else if (localStorage.getItem('ref_token')) {
         api = axios.create({
-            baseURL: 'http://0.0.0.0:8000',
+            baseURL: secrets.URL_DJANGO_REST_API,
             headers: {
                 "Content-type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem('ref_token')}`
@@ -24,7 +25,7 @@ const Axios = () => {
     } else {
         console.log('No token found');
     api = axios.create({    
-        baseURL: 'http://0.0.0.0:8000',
+        baseURL: secrets.URL_DJANGO_REST_API,
         headers: {
             'Content-Type': 'application/json',
         }

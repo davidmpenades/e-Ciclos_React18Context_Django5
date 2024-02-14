@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import contact from "../../assets/imgs/register.jpg";
+import contact from "../../assets/imgs/register.webp";
 import { toast } from "react-toastify";
 
 export default function RegLogForm({

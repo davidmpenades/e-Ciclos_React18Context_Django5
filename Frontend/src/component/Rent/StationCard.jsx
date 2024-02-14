@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useStations } from "../../hooks/useStations";
 import { useNavigate } from "react-router-dom";
-import foto from "../../assets/imgs/Home/foto2.jpg";
+import foto from "../../assets/imgs/Home/foto2.webp";
 
 export default function StationCard() {
   const location = useLocation();

@@ -3,7 +3,7 @@ import { useSlots } from "../../hooks/useSlots";
 import { useStations } from "../../hooks/useStations";
 import { useLocation } from "react-router-dom";
 import { Button } from "flowbite-react";
-import foto from "../../assets/imgs/Home/foto2.jpg";
+import foto from "../../assets/imgs/Home/foto2.webp";
 
 export default function StationCard() {
   const { slots } = useSlots();

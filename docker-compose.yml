@@ -10,8 +10,8 @@ services:
     ports:
       - "5434:5432"
     environment:
-      PG_USER: david
-      PG_PASSWORD: 1234
+      POSTGRES_USER: david
+      POSTGRES_PASSWORD: 1234
       
 
   backend:
@@ -32,6 +32,17 @@ services:
     ports:
       - "8001:8000"
 
+  frontend-react:
+    build:
+      context: ./Frontend
+    container_name: frontend_react
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./Frontend:/app
+
 volumes:
   postgres_container:
+
 
