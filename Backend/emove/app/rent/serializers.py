@@ -65,43 +65,74 @@ class RentSerializer(serializers.ModelSerializer):
         rent = Rent.objects.get(user_id=user.id, end_slot_id=None)
         return rent
     
-    def backBike(context):
-        username = context['username']
-        bike_id = context['bike_id']
-        slot_id = context['slot_id']
+    # def backBike(context):
+    #     username = context['username']
+    #     bike_id = context['bike_id']
+    #     slot_id = context['slot_id']
 
-        user = Users.objects.get(username=username)
+    #     user = Users.objects.get(username=username)
 
-        if user is None:
-            raise serializers.ValidationError('User not found')
+    #     if user is None:
+    #         raise serializers.ValidationError('User not found')
 
-        bike = Bikes.objects.get(pk=bike_id)
+    #     bike = Bikes.objects.get(pk=bike_id)
 
-        if bike is None:
-            raise serializers.ValidationError('Bike not found')
+    #     if bike is None:
+    #         raise serializers.ValidationError('Bike not found')
 
-        rent = Rent.objects.get(user_id=user.id, bike_id=bike_id, end_slot_id=None)
+    #     rent = Rent.objects.get(user_id=user.id,bike_id=bike_id, end_slot_id=None)
 
-        if rent is None:
-            raise serializers.ValidationError('Rent not found')
+    #     if rent is None:
+    #         raise serializers.ValidationError('Rent not found')
 
-        new_slot = Slots.objects.get(pk=slot_id)
+    #     new_slot = Slots.objects.get(pk=slot_id)
+    #     id_bike = rent.bike_id
+    #     bike = Bikes.objects.get(pk=id_bike)
+        
+    #     if new_slot is None or new_slot.bike_id is not None:
+    #         raise serializers.ValidationError('Slot not found or in use')
 
-        if new_slot is None or new_slot.bike_id is not None:
+    #     # if new_slot.status == "manteinance":
+    #     #     raise serializers.ValidationError('Slot in manteinance')
+
+    #     rent.end_slot_id = new_slot.id
+    #     rent.end_date = datetime.now()
+    #     rent.save()
+
+    #     new_slot.bike_id = bike.id
+    #     new_slot.status = 'in_use'
+    #     new_slot.save()
+
+    #     bike.status = 'vacant'
+    #     bike.save()
+    def backBike(self, instance, validated_data):
+        end_slot_id = validated_data.get('end_slot_id')
+        bike_id = validated_data.get('bike_id')
+        
+        if not end_slot_id:
+            raise serializers.ValidationError('End slot ID is required')
+        
+        if not bike_id:
+            raise serializers.ValidationError('Bike ID is required')
+        
+        new_slot = Slots.objects.filter(pk=end_slot_id, bike_id=None).first()
+        if not new_slot:
             raise serializers.ValidationError('Slot not found or in use')
+        
+        if new_slot.status == "maintenance":
+            raise serializers.ValidationError('Slot in maintenance')
 
-        if new_slot.status == "manteinance":
-            raise serializers.ValidationError('Slot in manteinance')
-
-        rent.end_slot_id = new_slot.id
-        rent.end_date = datetime.now()
-        rent.save()
-
-        new_slot.bike_id = bike.id
+        instance.end_slot = new_slot
+        instance.end_date = datetime.now()
+        instance.save()
+        
+        new_slot.bike_id = instance.bike_id
         new_slot.status = 'in_use'
         new_slot.save()
 
-        bike.status = 'vacant'
-        bike.save()
+        instance.bike.status = 'vacant'
+        instance.bike.save()
 
-        return rent
+        return instance 
+
+       

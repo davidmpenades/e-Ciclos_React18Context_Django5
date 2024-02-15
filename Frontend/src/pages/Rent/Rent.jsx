@@ -46,7 +46,7 @@ const Rent = () => {
         </header>
       ) : (
         <h1 className="font-bold text-gray-900 sm:text-5xl m-2 md:m-10 lg:m-10 text-center">
-          Bienvenido{" "}
+          Bienvenid@{" "}
           <b>
             <span
               style={{

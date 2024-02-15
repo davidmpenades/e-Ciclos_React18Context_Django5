@@ -18,8 +18,7 @@ export default function StationCard() {
   const { stationId } = location.state;
   const [filteredSlots, setFilteredSlots] = useState([]);
   const [filteredStation, setFilteredStation] = useState(null);
-  const { useRentBike } = useRent();
-  const { getOneRent } = useRent();
+  const { useRentBike, getOneRent, useBackRent } = useRent();
   const { isAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -42,18 +41,18 @@ export default function StationCard() {
   };
 
   const handlerRent = (slot) => {
+    console.log("renting", slot);
     if (!isAuth) {
       return () => {
         navigate("/login");
         toast.error("Debes iniciar sesión para alquilar una bicicleta");
       };
-    } else if (getOneRent){
+    } else if (getOneRent()){
       return () => {
         toast.error("Ya tienes una bicicleta alquilada. No puedes alquilar otra.");
       }
     }    
-    else {
-     
+    else {      
         return () => {
           console.log("renting", slot);
           const initialDate = getCurrentDateTime();
@@ -66,11 +65,31 @@ export default function StationCard() {
             end_date: '',
           };
           useRentBike(rentData);
-          navigate('/rent')
-        };
-      
+          // navigate('/rent')
+        };      
     }
   };
+
+  const handlerReturn = (slot) => {
+    console.log("returning", slot);
+    if (!isAuth) {
+      return () => {
+        navigate("/login");
+        toast.error("Debes iniciar sesión para devolver una bicicleta");
+      };
+    } else {
+      return () => {
+        const endData = getCurrentDateTime();
+        const backData = {
+          id: slot.id,         
+          end_slot_id: slot.id,
+          end_date: endData,
+        };
+        useBackRent(backData);
+        // navigate('/rent')
+      };
+    }
+  }
 
   return (
     <>
@@ -129,7 +148,10 @@ export default function StationCard() {
                 </Button>
               )}
               {slot.status !== "in_use" && (
-                <Button className="bg-green-500 text-white m-2 p-2 rounded flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
+                <Button 
+                  onClick={handlerReturn(slot)}
+                  className="bg-green-500 text-white m-2 p-2 rounded flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800"
+                >
                   <img src={qr} alt="qr" style={{ width: "38px" }} />
                   <span>Escanea el qr para dejar biciclera</span>
                 </Button>

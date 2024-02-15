@@ -23,44 +23,45 @@
 # Primera etapa: construir la aplicación
 FROM python:3 AS builder
 
-# Set unbuffered output for python
+# Establecer salida sin búfer para Python
 ENV PYTHONUNBUFFERED 1
 
-# Install PostgreSQL client and required Perl modules
+# Instalar cliente PostgreSQL y los módulos Perl requeridos
 RUN apt-get update && apt-get install -y postgresql-client libdbd-pg-perl
 
-# Create app directory
+# Crear directorio de la aplicación
 WORKDIR /app
 
-# Install app dependencies
+# Instalar las dependencias de la aplicación
 COPY ./Backend/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Bundle app source
+# Agrupar el código fuente de la aplicación
 COPY ./Backend .
 
 # Segunda etapa: crear la imagen final
 FROM python:3-slim
 
-COPY --from=builder /app/requirements.txt /app/requirements.txt
+COPY --from=builder /app/requirements.txt /app_django/requirements.txt
 
-# Install Django y otras dependencias necesarias
+# Instalar Django y otras dependencias necesarias
 RUN apt-get update && apt-get install -y postgresql-client libdbd-pg-perl \
-    && pip install --no-cache-dir -r /app/requirements.txt
+    && pip install --no-cache-dir -r /app_django/requirements.txt
 
-# Create app directory
-WORKDIR /app
+# Crear directorio de la aplicación
+WORKDIR /app_django
 
-# Copia solo los archivos necesarios de la etapa de construcción
-COPY --from=builder /app /app
+# Copiar solo los archivos necesarios de la etapa de construcción
+COPY --from=builder /app /app_django
 
-# Set executable permissions for scripts
-RUN chmod +x /app/django.sh
-RUN chmod +x /app/wait-for-postgres.sh
+# Establecer permisos ejecutables para los scripts
+RUN chmod +x /app_django/django.sh
+RUN chmod +x /app_django/wait-for-postgres.sh
 
-# Expose port
+# Exponer puerto
 EXPOSE 8000
 
-# entrypoint para ejecutar el archivo django.sh
-ENTRYPOINT ["/app/django.sh"]
+# Entrypoint para ejecutar el archivo django.sh
+ENTRYPOINT ["/app_django/django.sh"]
+

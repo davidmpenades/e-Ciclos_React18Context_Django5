@@ -13,8 +13,7 @@ const RentService = {
   },
   backRent(slot){
     console.log(slot);
-    return api().put(`/api/rent/`)
-
+    return api().put(`/api/backBike/`,slot)
   }
 };
 

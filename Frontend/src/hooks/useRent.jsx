@@ -36,6 +36,7 @@ export function useRent() {
     const getOneRent = () => {
         RentService.getOneRent()
         .then(({data, status}) => {
+            console.log(data, status);
             if(status === 200) {
                 return true
             }else {
@@ -44,6 +45,22 @@ export function useRent() {
         })
         .catch(e => console.log(e),)
     }
-    return  { rents, setRents, useRentBike, getOneRent }
+
+    const useBackRent = (slot) => {
+        console.log(slot);
+        RentService.backRent(slot)
+        .then(({data, status}) => {
+            console.log(data, status);
+            if (status === 200) {
+                toast.success("¡Bicicleta devuelta, gracias!.");
+                setIsCorrect(true);
+                setTimeout(() => { setIsCorrect(false); }, 1000);
+            }
+        })
+        .catch(() => {
+            console.log("Ha habido un error al devolver la bicicleta.");
+        });
+    }
+    return  { rents, setRents, useRentBike, getOneRent, useBackRent }
 }
 

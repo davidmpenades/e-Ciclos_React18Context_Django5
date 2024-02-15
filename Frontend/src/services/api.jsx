@@ -6,6 +6,7 @@ const Axios = () => {
     let api = null;   
 
     if (JwtService.getToken('token')) {
+        console.log('Token found');
         api = axios.create({
             baseURL: secrets.URL_DJANGO_REST_API,
             headers: {

@@ -6,7 +6,7 @@ import { Button } from "flowbite-react";
 import StationsList from "./Station/StationsList";
 import BikesList from "./Bikes/BikesList";
 import UsersList from "./Users/UsersList"
-import cartel from "../../assets/imgs/cartel.png";
+import cartel from "../../assets/imgs/cartel.webp";
 import SlotsList from "./Slots/SlotsList";
 
 const Dashboard = () => {
