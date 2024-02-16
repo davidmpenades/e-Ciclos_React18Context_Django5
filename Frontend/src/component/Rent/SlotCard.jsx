@@ -41,7 +41,6 @@ export default function StationCard() {
   };
 
   const handlerRent = (slot) => {
-    console.log("renting", slot);
     if (!isAuth) {
       return () => {
         navigate("/login");
@@ -54,7 +53,6 @@ export default function StationCard() {
     }    
     else {      
         return () => {
-          console.log("renting", slot);
           const initialDate = getCurrentDateTime();
           const rentData = {
             id: slot.id,
@@ -65,13 +63,12 @@ export default function StationCard() {
             end_date: '',
           };
           useRentBike(rentData);
-          // navigate('/rent')
+          navigate('/rent')
         };      
     }
   };
 
   const handlerReturn = (slot) => {
-    console.log("returning", slot);
     if (!isAuth) {
       return () => {
         navigate("/login");
@@ -86,7 +83,7 @@ export default function StationCard() {
           end_date: endData,
         };
         useBackRent(backData);
-        // navigate('/rent')
+        navigate('/rent')
       };
     }
   }

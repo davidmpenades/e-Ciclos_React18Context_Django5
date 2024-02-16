@@ -1,67 +1,22 @@
-# FROM python:3  
-# # # Set unbuffered output for python 
-# ENV PYTHONUNBUFFERED 1  
-# # # Install PostgreSQL client 
-#  RUN apt-get update && apt-get install -y postgresql-client  
-# #Create app directory 
-# WORKDIR /app  
-# #Install app dependencies 
-# COPY ./Backend/requirements.txt .   
-# RUN pip install -r requirements.txt  
-# # Bundle app source 
-# COPY ./Backend .    
-# #Copy wait-for-postgres.sh script 
-# COPY ./Backend/wait-for-postgres.sh /app/wait-for-postgres.sh 
-# RUN chmod +x /app/wait-for-postgres.sh   
-#  #Set executable permissions for scripts 
-# RUN chmod +x /app/django.sh  
-#  # # Expose port 
-# EXPOSE 8000 
+FROM python:3  
+# # Set unbuffered output for python 
+ENV PYTHONUNBUFFERED 1  
+# # Install PostgreSQL client 
+ RUN apt-get update && apt-get install -y postgresql-client  
+#Create app directory 
+WORKDIR /app  
+#Install app dependencies 
+COPY ./Backend/requirements.txt .   
+RUN pip install -r requirements.txt  
+# Bundle app source 
+COPY ./Backend .    
+#Copy wait-for-postgres.sh script 
+COPY ./Backend/wait-for-postgres.sh /app/wait-for-postgres.sh 
+RUN chmod +x /app/wait-for-postgres.sh   
+ #Set executable permissions for scripts 
+RUN chmod +x /app/django.sh  
+ # # Expose port 
+EXPOSE 8000 
 
-# ENTRYPOINT [ "/app/django.sh" ]
-
-# Primera etapa: construir la aplicación
-FROM python:3 AS builder
-
-# Establecer salida sin búfer para Python
-ENV PYTHONUNBUFFERED 1
-
-# Instalar cliente PostgreSQL y los módulos Perl requeridos
-RUN apt-get update && apt-get install -y postgresql-client libdbd-pg-perl
-
-# Crear directorio de la aplicación
-WORKDIR /app
-
-# Instalar las dependencias de la aplicación
-COPY ./Backend/requirements.txt .
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Agrupar el código fuente de la aplicación
-COPY ./Backend .
-
-# Segunda etapa: crear la imagen final
-FROM python:3-slim
-
-COPY --from=builder /app/requirements.txt /app_django/requirements.txt
-
-# Instalar Django y otras dependencias necesarias
-RUN apt-get update && apt-get install -y postgresql-client libdbd-pg-perl \
-    && pip install --no-cache-dir -r /app_django/requirements.txt
-
-# Crear directorio de la aplicación
-WORKDIR /app_django
-
-# Copiar solo los archivos necesarios de la etapa de construcción
-COPY --from=builder /app /app_django
-
-# Establecer permisos ejecutables para los scripts
-RUN chmod +x /app_django/django.sh
-RUN chmod +x /app_django/wait-for-postgres.sh
-
-# Exponer puerto
-EXPOSE 8000
-
-# Entrypoint para ejecutar el archivo django.sh
-ENTRYPOINT ["/app_django/django.sh"]
+ENTRYPOINT [ "/app/django.sh" ]
 

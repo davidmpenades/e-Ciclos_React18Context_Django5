@@ -5,6 +5,10 @@ from .serializers import RentSerializer
 from rest_framework.permissions import (IsAuthenticated, AllowAny)
 from emove.app.core.permissions import IsAdmin
 from .models import Rent
+from .models import Users
+from .models import Bikes
+from .models import Slots
+from emove.app.users.serializers import userSerializer
 
 class RentView(viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
@@ -34,27 +38,43 @@ class RentView(viewsets.GenericViewSet):
     #     serializer = RentSerializer.backBike(context=serializer_context)
     #     return Response(RentSerializer.to_rent(serializer))
     def backBike(self, request):
-        
-        username ={'username': request.user.username}        
-        return JsonResponse(username)
-        rent = Rent.objects.filter(user=request.user, end_slot_id=None).first()        
-        
+        username1 = request.user.username       
+        user = Users.objects.filter(username=username1).first()       
+        if not user:
+            return Response({'message': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        rent = Rent.objects.filter(user=user.id, end_slot_id=None).first()         
         if not rent:
             return Response({'message': 'No active rental found for this user.'}, status=status.HTTP_404_NOT_FOUND)
-       
-        data = request.data(RentSerializer(rent).data)
-        return Response(request.data)
-        # print(data)
-        serializer_context = {'end_slot_id': data.get('end_slot_id'), 'bike_id': data.get('bike_id')}
-        serializer = RentSerializer()
-        updated_rent = serializer.backBike(rent, serializer_context)
-        return Response(RentSerializer(updated_rent).data)
     
-        data = request.data['scooter']
-        username = request.user
-        serializer_context = {'username': username, 'slot_id': data['end_slot'], 'scooter_id': data['scooter_id']}
-        serializer = RentSerializer.bringbackScooter(context=serializer_context)
-        return Response(RentSerializer.to_rent(serializer))
+        bike = Bikes.objects.filter(id=rent.bike_id).first()   
+        if not bike:
+            return Response({'message': 'Bike not found.'}, status=status.HTTP_404_NOT_FOUND)             
+        
+        end_slot_id = request.data['end_slot_id'] 
+        bike_id = bike.id        
+        
+        new_slot = Slots.objects.filter(pk=end_slot_id, bike_id=None).first()
+        
+        if not new_slot:
+            return Response({'message': 'Slot not found or in use'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if new_slot.status == "maintenance":
+            return Response({'message': 'Slot in maintenance'}, status=status.HTTP_400_BAD_REQUEST)
+
+        rent.end_slot = new_slot
+        rent.end_date = request.data['end_date']
+        rent.save()
+        
+        new_slot.bike_id = bike_id
+        new_slot.status = 'in_use'
+        new_slot.save()
+
+        bike.status = 'vacant'
+        bike.save()
+
+        serializer = RentSerializer(rent)  # Serialize the updated rent object
+        return Response(serializer.data)
 
     
 class RentAdminView(viewsets.GenericViewSet):

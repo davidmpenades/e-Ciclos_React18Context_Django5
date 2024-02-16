@@ -1,6 +1,5 @@
 CREATE DATABASE emove;
 
-
 \c emove;
 
 -- Crear un usuario y asignarle privilegios

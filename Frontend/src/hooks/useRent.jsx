@@ -22,7 +22,6 @@ export function useRent() {
     const useRentBike = (slot) => {
         RentService.rentBike(slot)
         .then(({data, status}) => {
-            console.log(data, status);
             if (status === 200) {
                 toast.success("¡Bicicleta alquilada, gracias! Disfruta tu paseo.");
                 setIsCorrect(true);
@@ -36,7 +35,6 @@ export function useRent() {
     const getOneRent = () => {
         RentService.getOneRent()
         .then(({data, status}) => {
-            console.log(data, status);
             if(status === 200) {
                 return true
             }else {
@@ -47,7 +45,6 @@ export function useRent() {
     }
 
     const useBackRent = (slot) => {
-        console.log(slot);
         RentService.backRent(slot)
         .then(({data, status}) => {
             console.log(data, status);

@@ -105,34 +105,34 @@ class RentSerializer(serializers.ModelSerializer):
 
     #     bike.status = 'vacant'
     #     bike.save()
-    def backBike(self, instance, validated_data):
+    def backBike(self,instance, validated_data):
         end_slot_id = validated_data.get('end_slot_id')
         bike_id = validated_data.get('bike_id')
-        
+
         if not end_slot_id:
             raise serializers.ValidationError('End slot ID is required')
-        
+
         if not bike_id:
             raise serializers.ValidationError('Bike ID is required')
-        
+
         new_slot = Slots.objects.filter(pk=end_slot_id, bike_id=None).first()
         if not new_slot:
             raise serializers.ValidationError('Slot not found or in use')
-        
+
         if new_slot.status == "maintenance":
             raise serializers.ValidationError('Slot in maintenance')
 
         instance.end_slot = new_slot
         instance.end_date = datetime.now()
         instance.save()
-        
-        new_slot.bike_id = instance.bike_id
+
+        new_slot.bike_id = bike_id
         new_slot.status = 'in_use'
         new_slot.save()
 
         instance.bike.status = 'vacant'
         instance.bike.save()
 
-        return instance 
+        return instance
 
        
