@@ -285,10 +285,7 @@ volumes:
 
 | Archivo               | Puertos Expuestos    |
 |-----------------------|----------------------|
-| Dockerfile.backend    | No expone puertos   |
 | Dockerfile.frontend   | Puerto 5173          |
-| Dockerfile.postgres   | No expone puertos   |
-| Dockerfile.node       | Puerto 5173          |
 | docker-compose.yml    | - 5434:5432 (PostgreSQL) |
 |                       | - 8001:8000 (Backend)    |
 |                       | - 5173:5173 (Frontend)   |
