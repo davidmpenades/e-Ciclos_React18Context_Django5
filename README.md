@@ -25,7 +25,25 @@ npm install
 
 ```
 
-### Levantar Docker
+## Levantar Docker
+
+### Requisitos Previos
+
+Antes de comenzar con la configuración y ejecución de la aplicación e-Move, asegúrate de tener instalados los siguientes requisitos:
+
+### Docker
+
+Es necesario tener Docker instalado en tu sistema. Docker es una plataforma que permite desarrollar, enviar y ejecutar aplicaciones dentro de contenedores.
+
+Puedes descargar e instalar Docker desde [Docker Hub](https://hub.docker.com/).
+
+### Docker Desktop
+
+Si estás utilizando Windows o macOS, se recomienda instalar Docker Desktop, que proporciona una experiencia de Docker completa, incluyendo el motor Docker, el CLI de Docker y Docker Compose.
+
+Puedes descargar Docker Desktop desde [Docker Hub](https://hub.docker.com/).
+
+### Empecemos
 
 Para que arranque la aplicación por primera vez debemos ejecutar el siguiente comando:
 
