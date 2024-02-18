@@ -11,7 +11,8 @@ Puede seguir el siguiente tutorial para descargarlo y probarlo.
 Para comenzar, clona este repositorio en tu máquina local utilizando el siguiente comando:
 
 ```
-https://github.com/davidmpenades/e-Move_React18Context_Django5.git
+git clone https://github.com/davidmpenades/e-Move_React18Context_Django5.git
+
 ```
 
 Una vez clonado el repositorio, accede al directorio del proyecto
