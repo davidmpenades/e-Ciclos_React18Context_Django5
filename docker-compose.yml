@@ -13,7 +13,7 @@ services:
     environment:
       POSTGRES_USER: 'david'
       POSTGRES_PASSWORD: 1234
-    
+
   backend:
     build:
       context: .
@@ -45,3 +45,6 @@ services:
 
 volumes:
   postgres_container: 
+
+  
+
