@@ -2,31 +2,32 @@ version: '3'
 
 services:
   postgres:
-    image: postgres
+    image: postgres:15
     container_name: postgres_container
     volumes:
       - postgres_container:/var/lib/postgresql/data
-      - ./db_init.sql:/docker-entrypoint-initdb.d/init.sql 
+      - ./Backend/bk/exportacion.sql:/docker-entrypoint-initdb.d/exportacion.sql
+    
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_USER: david
+      POSTGRES_USER: 'david'
       POSTGRES_PASSWORD: 1234
-      
-
+    
   backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
     container_name: backend_container
     environment:
+      - PG_DB=emove
       - PG_USER=david
       - PG_PASSWORD=1234
       - PG_HOST=postgres_container
       - PG_PORT=5432
-      - PG_DB=emove
     volumes:
       - ./Backend:/app
+      - ./Backend/bk:/app_django/bk
     depends_on:
       - postgres
     ports:
@@ -43,4 +44,4 @@ services:
       - ./Frontend:/app
 
 volumes:
-  postgres_container:
+  postgres_container: 
