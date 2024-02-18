@@ -3,6 +3,8 @@
 Esta aplicación esta disesñada para el alquiler de bicicletas eléctricas en el ambito urbano.
 Puede seguir el siguiente tutorial para descargarlo y probarlo.
 
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/b0f17d6b-5299-4582-ae3b-154072143eeb)
+
 ## Primero
 
 ### Clonar el Repositorio
