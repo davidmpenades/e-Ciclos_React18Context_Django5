@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # OS or Editor files
-
+secret.js

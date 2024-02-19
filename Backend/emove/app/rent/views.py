@@ -75,6 +75,12 @@ class RentView(viewsets.GenericViewSet):
 
         serializer = RentSerializer(rent)  # Serialize the updated rent object
         return Response(serializer.data)
+    
+    def allRents(self, request):
+        data = Rent.objects.all()
+        print(data)
+        serializer = RentSerializer(data, many=True)
+        return Response(serializer.data)
 
     
 class RentAdminView(viewsets.GenericViewSet):

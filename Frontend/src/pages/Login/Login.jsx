@@ -12,7 +12,7 @@ const Login = () => {
     useEffect(() => {
         if (isCorrect) {
             toast.success("Bienvenido!");
-            navigate("/");
+            navigate("/rent");
         } else if (errorMSG) {
             toast.error(errorMSG);
         }        

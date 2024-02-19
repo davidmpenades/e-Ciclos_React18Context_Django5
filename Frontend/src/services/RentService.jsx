@@ -7,12 +7,13 @@ const RentService = {
   getAllRents() {
     return api().get("/api/rents/");
   },
+  allRents() {
+    return api().get("/api/allRents/");
+  },
   rentBike(slot){
-    console.log(slot);
     return api().post(`/api/rent/${slot.id}`)
   },
   backRent(slot){
-    console.log(slot);
     return api().put(`/api/backBike/`,slot)
   }
 };

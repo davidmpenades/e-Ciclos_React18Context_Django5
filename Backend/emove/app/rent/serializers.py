@@ -65,46 +65,6 @@ class RentSerializer(serializers.ModelSerializer):
         rent = Rent.objects.get(user_id=user.id, end_slot_id=None)
         return rent
     
-    # def backBike(context):
-    #     username = context['username']
-    #     bike_id = context['bike_id']
-    #     slot_id = context['slot_id']
-
-    #     user = Users.objects.get(username=username)
-
-    #     if user is None:
-    #         raise serializers.ValidationError('User not found')
-
-    #     bike = Bikes.objects.get(pk=bike_id)
-
-    #     if bike is None:
-    #         raise serializers.ValidationError('Bike not found')
-
-    #     rent = Rent.objects.get(user_id=user.id,bike_id=bike_id, end_slot_id=None)
-
-    #     if rent is None:
-    #         raise serializers.ValidationError('Rent not found')
-
-    #     new_slot = Slots.objects.get(pk=slot_id)
-    #     id_bike = rent.bike_id
-    #     bike = Bikes.objects.get(pk=id_bike)
-        
-    #     if new_slot is None or new_slot.bike_id is not None:
-    #         raise serializers.ValidationError('Slot not found or in use')
-
-    #     # if new_slot.status == "manteinance":
-    #     #     raise serializers.ValidationError('Slot in manteinance')
-
-    #     rent.end_slot_id = new_slot.id
-    #     rent.end_date = datetime.now()
-    #     rent.save()
-
-    #     new_slot.bike_id = bike.id
-    #     new_slot.status = 'in_use'
-    #     new_slot.save()
-
-    #     bike.status = 'vacant'
-    #     bike.save()
     def backBike(self,instance, validated_data):
         end_slot_id = validated_data.get('end_slot_id')
         bike_id = validated_data.get('bike_id')

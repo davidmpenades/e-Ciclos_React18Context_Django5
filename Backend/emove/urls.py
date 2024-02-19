@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/', include('emove.app.slots.urls')),
     path('api/', include('emove.app.users.urls')),
     path('api/', include('emove.app.rent.urls')),
+    path('api/', include('emove.app.incidents.urls')),
 ]

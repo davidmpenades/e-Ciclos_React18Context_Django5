@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'emove.app.slots',
     'emove.app.users',
     'emove.app.rent',
+    'emove.app.incidents',
 ]
 
 MIDDLEWARE = [
