@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import UsersListAdmin from "../../../component/Admin/Users/UsersListAdmin";
 
 const UsersList = () => {
-  const { users, useAllUsers } = useAuth();
+  const { users } = useAuth();
   console.log(users);
-
-  useEffect(() => {
-    useAllUsers();
-  }, []);
 
   return (
     <div>
@@ -29,7 +25,7 @@ const UsersList = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <UsersListAdmin key={user.id} user={user} />
+            <UsersListAdmin key={u.id} user={user} />
           ))}
         </tbody>
       </table>

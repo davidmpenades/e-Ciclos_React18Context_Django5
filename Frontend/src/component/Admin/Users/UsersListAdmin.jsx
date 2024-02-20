@@ -1,7 +1,6 @@
 import React  from "react";
 
 const UsersListAdmin = ({user}) => {
-    console.log(user);
 
     return(
         <tr>

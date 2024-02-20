@@ -1,23 +1,47 @@
-import React, { useEffect, useState } from "react";
-import SlotService from "../services/SlotService"
+import React, { createContext, useEffect, useState } from "react";
+import SlotService from "../services/SlotService";
 
-const Context = React.createContext({})
+const SlotsContext = createContext();
 
 export function SlotsContextProvider({ children }) {
-    const [ slots, setSlots ] = useState([])
+  const [slots, setSlots] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        SlotService.getAllSlots()
-            .then(({ data }) => {
-                setSlots(data);
-            })
-            .catch((error) => console.log(error));
-    }, [setSlots]);
-    return (
-        <Context.Provider value={{ slots }}>
-            {children}
-        </Context.Provider>
-    )
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await SlotService.getAllSlots();
+        setSlots(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message || "Error fetching slots");
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const updateSlotStatus = (slotId, status) => {
+    setSlots((prevSlots) =>
+      prevSlots.map((slot) =>
+        slot.id === slotId ? { ...slot, status: status } : slot
+      )
+    );
+  };
+
+  return (
+    <SlotsContext.Provider value={{ slots, updateSlotStatus }}>
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : (
+        children
+      )}
+    </SlotsContext.Provider>
+  );
 }
 
-export default Context
+export default SlotsContext;

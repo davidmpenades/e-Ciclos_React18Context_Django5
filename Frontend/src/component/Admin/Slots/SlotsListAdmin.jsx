@@ -1,9 +1,7 @@
 import React from "react";
 
 export default function SlotsList({ slot }) {
-  console.log("SlotListAdmin");
-    return(
-       
+    return(       
         <tr>
             <td className="border w-10">{slot.id}</td>            
             <td className="border w-32">

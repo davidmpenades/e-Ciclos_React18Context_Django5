@@ -1,23 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import RentService from "../services/RentService";
+import SlotsContext from "../context/SlotsContext";
 import { toast } from "react-toastify";
 
 export function useRent() {
-    const [rents, setRents] = useState([])
-    const [isCorrect, setIsCorrect] = useState(false)
-
-    // useEffect(() => {
-        // const path = pathname.split('/')[1]
-        // if (path === 'dashboard') {
-            // RentService.allRents()
-            // .then(({data, status}) => {
-            //     if(status === 200) {
-            //         setRents(data)
-            //     }
-            // })
-            // .catch(e => console.log(e))
-        // }
-    // },[])
+    const [rents, setRents] = useState([]);
+    const { slots, updateSlotStatus } = useContext(SlotsContext); 
+    const [isCorrect, setIsCorrect] = useState(false);
 
     const useRentBike = (slot) => {
         RentService.rentBike(slot)
@@ -25,6 +14,7 @@ export function useRent() {
             if (status === 200) {
                 toast.success("¡Bicicleta alquilada, gracias! Disfruta tu paseo.");  
                 setRents(data);
+                updateSlotStatus(slot.id, "vacant"); 
                 setIsCorrect(true);
                 setTimeout(() => { setIsCorrect(false); }, 1000);
             }
@@ -36,8 +26,8 @@ export function useRent() {
     };
     const getOneRent = () => {
         RentService.getOneRent()
-        .then(({data, status}) => {
-            if(status === 200) {
+        .then(({data}) => {
+            if(data.end_slot_id === '') {
                 return true
             }else {
                 return false
@@ -52,6 +42,7 @@ export function useRent() {
             if (status === 200) {
                 toast.success("¡Bicicleta devuelta, gracias!.");
                 setRents(data);
+                updateSlotStatus(slot.id, "in_use"); 
                 setIsCorrect(true);
                 setTimeout(() => { setIsCorrect(false); }, 1000);
             }
@@ -62,4 +53,3 @@ export function useRent() {
     }
     return  { rents, setRents, useRentBike, getOneRent, useBackRent }
 }
-

@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, createContext, useContext } from "react";
 import AuthService from "../services/AuthService";
 import JwtService from "../services/JWTService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Context = React.createContext({});
+const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
   const [token, setToken] = useState(
     JwtService.getToken ? JwtService.getToken : false
   );
@@ -66,7 +66,7 @@ export function AuthContextProvider({ children }) {
 }, []);
 
   return (
-    <Context.Provider
+    <AuthContext.Provider
       value={{
         user,
         setUser,
@@ -80,8 +80,8 @@ export function AuthContextProvider({ children }) {
       }}
     >
       {children}
-    </Context.Provider>
+    </AuthContext.Provider>
   );
 }
 
-export default Context;
+export default AuthContext;

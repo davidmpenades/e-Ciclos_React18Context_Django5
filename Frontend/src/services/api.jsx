@@ -22,7 +22,6 @@ const Axios = () => {
             }
         });
     } else {
-        console.log('No token found');
     api = axios.create({    
         baseURL: secrets.URL_DJANGO_REST_API,
         headers: {

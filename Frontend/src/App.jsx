@@ -8,6 +8,7 @@ import SpinnerLoading from "./component/SpinnerLoading/SpinnerLoading";
 import { StationsContextProvider } from "./context/StationsContext";
 import { BikesContextProvider } from "./context/BikesContext";
 import { SlotsContextProvider } from "./context/SlotsContext";
+import { IncidentsContextProvider } from "./context/IncidentsContext";
 import { AuthContextProvider } from "./context/AuthContext";
 //guard
 // import AuthGuard from "./services/Guards/AuthGuard";
@@ -35,37 +36,42 @@ function App() {
           <StationsContextProvider>
             <BikesContextProvider>
               <SlotsContextProvider>
-                <AuthContextProvider>
-                  <Header />
-                  <ToastContainer
-                    position="top-center"
-                    autoClose={2000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="colored"
-                  />
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route element={<AdminGuard />}>
-                      <Route path="/dashboard" element={<Dashboard />} />
+                <AuthContextProvider>                  
+                  <IncidentsContextProvider>
+                    <Header />
+                    <ToastContainer
+                      position="top-center"
+                      autoClose={2000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                      theme="colored"
+                    />
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route element={<AdminGuard />}>
+                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route
+                          path="/dashboard/stationsList"
+                          element={<StationsList />}
+                        />
+                      </Route>
+                      <Route path="/plan" element={<Plan />} />
+                      <Route path="/Contact" element={<Contact />} />
+                      <Route path="/rent" element={<Rent />} />
                       <Route
-                        path="/dashboard/stationsList"
-                        element={<StationsList />}
+                        path="/StationDetail"
+                        element={<StationDetail />}
                       />
-                    </Route>
-                    <Route path="/plan" element={<Plan />} />
-                    <Route path="/Contact" element={<Contact />} />
-                    <Route path="/rent" element={<Rent />} />
-                    <Route path="/StationDetail" element={<StationDetail />} />
-                    <Route path="/SlotCard" element={<SlotCard />} />
-                    <Route path="/Login" element={<Login />} />
-                  </Routes>
-                  <MyFooter />
+                      <Route path="/SlotCard" element={<SlotCard />} />
+                      <Route path="/Login" element={<Login />} />
+                    </Routes>
+                    <MyFooter />
+                  </IncidentsContextProvider>
                 </AuthContextProvider>
               </SlotsContextProvider>
             </BikesContextProvider>

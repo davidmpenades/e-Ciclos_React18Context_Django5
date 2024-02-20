@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useSlots } from "../../hooks/useSlots";
 import { useStations } from "../../hooks/useStations";
+import { useIncidents } from "../../hooks/useIncidents";
 import { useLocation } from "react-router-dom";
 import { useRent } from "../../hooks/useRent";
 import AuthContext from "../../context/AuthContext";
@@ -10,6 +11,7 @@ import { Button } from "flowbite-react";
 import qr from "../../assets/icons/qr.png";
 import { toast } from "react-toastify";
 import foto from "../../assets/imgs/Home/foto2.webp";
+import IncidentsSlotModal from "../Client/IncidentsSlotModal";
 
 export default function StationCard() {
   const { slots } = useSlots();
@@ -21,6 +23,7 @@ export default function StationCard() {
   const { useRentBike, getOneRent, useBackRent } = useRent();
   const { isAuth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { useAddSlotIncidence } = useIncidents();
 
   useEffect(() => {
     const filteredSlotsResult = slots
@@ -42,29 +45,24 @@ export default function StationCard() {
 
   const handlerRent = (slot) => {
     if (!isAuth) {
-      return () => {
-        navigate("/login");
-        toast.error("Debes iniciar sesión para alquilar una bicicleta");
+      navigate("/login");
+      toast.error("Debes iniciar sesión para alquilar una bicicleta");
+    } else if (getOneRent()) {
+      toast.error(
+        "Ya tienes una bicicleta alquilada. No puedes alquilar otra."
+      );
+    } else {
+      const initialDate = getCurrentDateTime();
+      const rentData = {
+        id: slot.id,
+        bike: slot.bike_id,
+        initial_slot: slot.id,
+        end_slot: "",
+        initial_date: initialDate,
+        end_date: "",
       };
-    } else if (getOneRent()){
-      return () => {
-        toast.error("Ya tienes una bicicleta alquilada. No puedes alquilar otra.");
-      }
-    }    
-    else {      
-        return () => {
-          const initialDate = getCurrentDateTime();
-          const rentData = {
-            id: slot.id,
-            bike: slot.bike_id,
-            initial_slot: slot.id,
-            end_slot: '',
-            initial_date: initialDate,
-            end_date: '',
-          };
-          useRentBike(rentData);
-          navigate('/rent')
-        };      
+      useRentBike(rentData);
+      navigate("/rent");
     }
   };
 
@@ -78,15 +76,15 @@ export default function StationCard() {
       return () => {
         const endData = getCurrentDateTime();
         const backData = {
-          id: slot.id,         
+          id: slot.id,
           end_slot_id: slot.id,
           end_date: endData,
         };
         useBackRent(backData);
-        navigate('/rent')
+        navigate("/rent");
       };
     }
-  }
+  };
 
   return (
     <>
@@ -137,7 +135,7 @@ export default function StationCard() {
             <div className="container flex-row mt-4 align-center">
               {slot.status !== "vacant" && (
                 <Button
-                  onClick={handlerRent(slot)}
+                  onClick={() => handlerRent(slot)}
                   className="bg-blue-500 text-white m-2 p-2 rounded hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800"
                 >
                   <img src={qr} alt="qr" style={{ width: "38px" }} />
@@ -145,7 +143,7 @@ export default function StationCard() {
                 </Button>
               )}
               {slot.status !== "in_use" && (
-                <Button 
+                <Button
                   onClick={handlerReturn(slot)}
                   className="bg-green-500 text-white m-2 p-2 rounded flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:shadow-outline-green active:bg-green-800"
                 >
@@ -153,9 +151,10 @@ export default function StationCard() {
                   <span>Escanea el qr para dejar biciclera</span>
                 </Button>
               )}
-              <Button className="bg-red-500 text-white m-2 p-2 rounded hover:bg-red-900 focus:outline-none focus:shadow-outline-green active:bg-green-800">
-                Incidencia
-              </Button>
+              <IncidentsSlotModal
+                slotId={slot.id}
+                addIncident={useAddSlotIncidence}
+              />
             </div>
           </div>
         ))}

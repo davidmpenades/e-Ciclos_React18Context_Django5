@@ -5,9 +5,10 @@ import logo from "../../assets/imgs/logo.png";
 import { Button } from "flowbite-react";
 import StationsList from "./Station/StationsList";
 import BikesList from "./Bikes/BikesList";
-import UsersList from "./Users/UsersList"
+import UsersList from "./Users/UsersList";
 import cartel from "../../assets/imgs/cartel.webp";
 import SlotsList from "./Slots/SlotsList";
+import IncidentsList from "./Incidents/IncidentsList";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Dashboard = () => {
 
   const renderContent = () => {
     switch (selectedItem) {
+      
       case "Dashboard":
         return <img className="cartel" src={cartel} />;
       case "Stations":
@@ -30,6 +32,8 @@ const Dashboard = () => {
         return <SlotsList />;
       case "Users":
         return <UsersList />;
+      case "Incidents":
+        return <IncidentsList />;
       default:
         return null;
     }
@@ -53,7 +57,6 @@ const Dashboard = () => {
                 fill="none"
                 stroke="currentColor"
               >
-               
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
@@ -124,6 +127,22 @@ const Dashboard = () => {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
               <p>Usuarios</p>
+            </a>
+          </li>
+          <li>
+            <a onClick={() => handleSelectItem("Incidents")}>
+              <svg
+                className="h-6 w-6 text-black"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />{" "}
+                <circle cx="9" cy="7" r="4" />{" "}
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />{" "}
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              <p>Incidencias</p>
             </a>
           </li>
         </ul>
