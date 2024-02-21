@@ -7,7 +7,7 @@ export default function StationsList() {
   const { stations, useDeleteStation, useCreateStation, useUpdateStation } =
     useStations();
   const modalType = "add";
-  console.log("StationList");
+  
   return (
     <div>      
         <div className="header flex items-center justify-between mb-3 mr-6">

@@ -26,7 +26,6 @@ export default function ModalAdd({
     status: station.slug != "" ? station.status : "",
     img_st: station.slug != "" ? station.img_st : "",
   });
-  console.log(formData);
 
   const TypeModal =
     modalType === "add" ? (
@@ -52,7 +51,6 @@ export default function ModalAdd({
 
   const handelClick = () => {
     if (modalType === "add") {
-      console.log("add");
       setOpenModal(false);
       setFormData({
         name: "",
@@ -64,7 +62,6 @@ export default function ModalAdd({
       });
       add(formData);
     } else {
-      console.log("update");
       setOpenModal(false);
       updateStation(formData, station.id);
     }

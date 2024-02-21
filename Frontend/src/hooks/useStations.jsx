@@ -54,9 +54,7 @@ export function useStations() {
 
   const useUpdateStation = useCallback(
     (station, id) => {
-      console.log(station);
       let stationUpdated = {
-        // slug: station.slug,
         name: station.name,
         num_bikes: station.num_bikes,
         latitude: station.latitude,
@@ -64,7 +62,6 @@ export function useStations() {
         status: station.status,
         img_st: station.img_st,
       };
-      console.log(stationUpdated);
       StationService.updateStation(stationUpdated, id)
         .then(({ data, status }) => {
           if ((data, status === 200)) {

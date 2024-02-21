@@ -3,7 +3,7 @@ import { useIncidents } from "../../../hooks/useIncidents"
 import IncidentsListAdmin from "../../../component/Admin/Incidents/IncidentsListAdmin";
 
 const IncidentsList = () => {
-    const { incidentsSlots } = useIncidents()
+    const { incidentsSlots, useDeleteIncidence, useUpdateIncidence } = useIncidents()
 
     return(
         <>
@@ -23,7 +23,9 @@ const IncidentsList = () => {
           {incidentsSlots.map((incident) => (
             <IncidentsListAdmin
               key={incident.id}
-              incident={incident}            
+              incident={incident}  
+              deleteIncident={useDeleteIncidence} 
+              updateIncidente={useUpdateIncidence}         
             />
           ))}
         </tbody>

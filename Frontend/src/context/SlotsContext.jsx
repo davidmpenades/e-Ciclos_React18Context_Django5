@@ -5,7 +5,6 @@ const SlotsContext = createContext();
 
 export function SlotsContextProvider({ children }) {
   const [slots, setSlots] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -13,10 +12,8 @@ export function SlotsContextProvider({ children }) {
       try {
         const { data } = await SlotService.getAllSlots();
         setSlots(data);
-        setLoading(false);
       } catch (error) {
         setError(error.message || "Error fetching slots");
-        setLoading(false);
       }
     };
 
@@ -33,13 +30,7 @@ export function SlotsContextProvider({ children }) {
 
   return (
     <SlotsContext.Provider value={{ slots, updateSlotStatus }}>
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>Error: {error}</div>
-      ) : (
-        children
-      )}
+      {children}
     </SlotsContext.Provider>
   );
 }

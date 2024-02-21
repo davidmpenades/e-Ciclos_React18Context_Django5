@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useContext, useCallback } from "react";
 import AuthService from "../services/AuthService";
 import AuthContext from "../context/AuthContext";
@@ -12,15 +12,15 @@ export function useAuth() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [errorMSG, setErrorMSG] = useState("");
   const Navigate = useNavigate();
-  const [users, setUsers] = useState({});
-  
-  const useAllUsers = useCallback(() => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
     AuthService.getAllUsers()
       .then(({ data }) => {
         setUsers(data);
       })
       .catch((e) => console.error(e));
-  }, [users]);
+  }, []);
 
   const useLogin = useCallback(
     (data) => {
@@ -75,5 +75,5 @@ export function useAuth() {
     },
     [setUser]
   );
-  return { useAuth, useLogin, useRegister, user, setUser,users, errorMSG, isCorrect, useAllUsers };
+  return { useAuth, useLogin, useRegister, user, setUser,users, errorMSG, isCorrect };
 }

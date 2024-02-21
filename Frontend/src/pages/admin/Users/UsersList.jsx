@@ -4,8 +4,7 @@ import UsersListAdmin from "../../../component/Admin/Users/UsersListAdmin";
 
 const UsersList = () => {
   const { users } = useAuth();
-  console.log(users);
-
+  
   return (
     <div>
       <div className="header flex items-center justify-between mb-3 mr-6">
@@ -25,7 +24,7 @@ const UsersList = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <UsersListAdmin key={u.id} user={user} />
+            <UsersListAdmin key={user.id} user={user} />
           ))}
         </tbody>
       </table>

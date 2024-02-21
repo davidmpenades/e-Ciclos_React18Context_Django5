@@ -6,6 +6,12 @@ const IncidentsService = {
     },
     createIncidentSlot(data) {
         return api().post('/api/slot_incidence', data);
+    },
+    deleteIncidentSlot(id) {
+        return api().delete(`/api/slot_incidence_del/${id}`);
+    },
+    UpdateIncidence(id, data) {
+        return api().patch(`/api/slot_incidence/${id}`, data);
     }
 }
 
