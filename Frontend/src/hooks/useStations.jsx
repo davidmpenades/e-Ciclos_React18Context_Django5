@@ -30,7 +30,6 @@ export function useStations() {
     (id) => {
       StationService.getOneStation(id)
         .then(({ data }) => {
-          console.log(data);
           setOneStation(data);
         })
         .catch((e) => console.error(e));

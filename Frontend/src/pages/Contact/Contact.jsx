@@ -37,7 +37,6 @@ export default function Contact() {
       )
       .then(
         (result) => {
-          console.log(result.text);
           setFormData({
             name: "",
             email: "",
@@ -50,7 +49,6 @@ export default function Contact() {
         (error) => {
           <Toaster position="top-center" richColors />;
           toast.error("Error al enviar el mensaje");
-          console.log(error.text);
         }
       );
   };

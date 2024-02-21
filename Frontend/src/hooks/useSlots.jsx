@@ -9,7 +9,6 @@ export function useSlots() {
     const useOnteSlot = useCallback((id) => {
         SlotService.getOneSlot(id)
             .then(({ data }) => {
-                console.log(data);
                 setOneSlot(data);
             })
             .catch((e) => console.error(e));

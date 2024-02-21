@@ -47,11 +47,9 @@ export default function ModalAdd({
 
   const handelClick = () => {
     if (modalType === "add") {
-      console.log("add");
       setOpenModal(false);
       add(formData);
     } else {
-      console.log("update");
       setOpenModal(false);
       updateBike(formData, bike.id);
     }

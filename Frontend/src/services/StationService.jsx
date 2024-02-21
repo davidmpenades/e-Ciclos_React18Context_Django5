@@ -14,7 +14,6 @@ const StationService = {
     return api().post("/api/stations/", addStation);
   },
   updateStation(updateStation, id) {
-    console.log(updateStation, id);
     return api().put(`/api/stations/${id}`, updateStation);
   },
 };

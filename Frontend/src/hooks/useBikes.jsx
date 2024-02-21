@@ -30,7 +30,6 @@ export function useBikes() {
     (bike) => {
       BikeService.createBike(bike).then(({ data, status }) => {
         if (status === 201) {
-          console.log(bikes);
           notifyAdd();
           setBikes([...bikes, data]);
         }

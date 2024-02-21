@@ -11,7 +11,6 @@ const AuthService = {
     return api().get("/api/users/")
   },
   Register(data) {
-    console.log(data);
     return api().post("/api/register/", data);
   },
   refreshToken() {

@@ -7,11 +7,9 @@ export function useNotifications() {
     const { notifications, setNotifications, notificationsNumber, setNotificationsNumber } = useContext(NotificationsContext);
 
     const useSeeNotification = useCallback((id) => {
-        console.log(id);
         NotificationsService.updateNotificationStatus(id)
             .then(({ data, status }) => {
                 if (status === 200) {
-                    console.log(data);
                     setNotifications(notifications.filter(item => item.id !== id));
                     toast.info('Notification seen.');
                 }
