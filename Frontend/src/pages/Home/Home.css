@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'toxt';
+    src: url('../../assets/font/Tox.ttf') format('truetype');    
+  }
+
+.videoHeader{
+  position: "relative"; 
+  width: 100%;
+  height: 60vh;
+}
+video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.quote{
+  position: absolute; 
+  top: 20%; 
+  left: 2%;
+  right:2%; 
+}
+p{
+  font-family: 'toxt' !important;
+  color: rgb(163, 161, 161);
+  font-size: 5rem;
+  text-align: center;
+  line-height: 1.5;
+}
+.quoteText{
+  font-family: 'toxt' !important;
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px #000000;
+  line-height: 1.5;
+}
+.quoteTextImage{
+  color: grey;
+}
+section{
+  font-family: 'toxt' !important;
+}

@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_container
+    volumes:
+      - postgres_container:/var/lib/postgresql/data
+      - ./Backend/bk/exportacion.sql:/docker-entrypoint-initdb.d/exportacion.sql
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: david
+      POSTGRES_PASSWORD: 1234
+      
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: backend_container
+    environment:
+      - PG_USER=david
+      - PG_PASSWORD=1234
+      - PG_HOST=postgres_container
+      - PG_PORT=5432
+      - PG_DB=emove
+    volumes:
+      - ./Backend:/app
+    depends_on:
+      - postgres
+    ports:
+      - "8001:8000"
+
+  frontend-react:
+    build:
+      context: ./Frontend
+    container_name: frontend_react
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./Frontend:/app
+
+volumes:
+  postgres_container:
+
+
