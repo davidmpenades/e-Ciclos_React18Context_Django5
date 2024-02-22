@@ -15,7 +15,21 @@ git clone https://github.com/davidmpenades/e-Move_React18Context_Django5.git
 
 ```
 
-Una vez clonado el repositorio, accede al directorio del proyecto
+Una vez clonado el repositorio, accede al directorio del proyecto:
+
+```
+
+cd e-Move_React18Context_Django5
+
+```
+
+Cambiamos de rama a:
+
+```
+
+git checkout main-docker-compose
+
+```
 
 ### Instalación de Dependencias en el Frontend
 
