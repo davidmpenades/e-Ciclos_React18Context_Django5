@@ -19,7 +19,7 @@ Una vez clonado el repositorio, accede al directorio del proyecto
 
 ### Instalación de Dependencias en el Frontend
 
-Para instalar las dependencias del Frontend, accede al directorio Frontend y ejecuta el siguiente comando:
+Ya dentro del directorio del proyecto ejecuta el siguiente comando, esto nos intalará las dependencias de react:
 
 ```
 
@@ -60,11 +60,11 @@ Lo podemos ver en un navegador en la siguiente URL:
 
 ```
 
-localhost:5173
+localhost/
 
 ```
 
-Si ya hemos creado el entorno de docker el siguiente comando:
+Si ya hemos creado el entorno de docker, solo hará falta levantar los contenedores con el siguiente comando:
 
 ```
 
@@ -211,40 +211,54 @@ Se establecen varias configuraciones para el usuario "david", incluyendo la codi
 y la zona horaria.
 Se otorgan todos los privilegios sobre la base de datos "emove" al usuario "david".
 
-## docker-compose.yml para e-Move
+# Configuración Docker Compose
 
-Este archivo docker-compose.yml se utiliza para definir y ejecutar los servicios necesarios para la aplicación e-Move, incluyendo el servidor de base de 
-datos PostgreSQL, el backend y el frontend.
+Este repositorio contiene un archivo `docker-compose.yml` que configura varios servicios para un entorno de desarrollo local utilizando Docker Compose.
 
-### Servicio PostgreSQL
-<ul>
-  <li><b>Imagen</b>: Utiliza la imagen oficial de PostgreSQL para crear el servicio de base de datos.</li>
-  <li><b>Container Name</b>: Establece el nombre del contenedor como postgres_container.</li>
-  <li><b>Volúmenes</b>: Mapea el volumen postgres_container al directorio donde se almacenan los datos de PostgreSQL dentro del contenedor. Además, monta el 
-  archivo db_init.sql en el directorio de inicialización de la base de datos.</li>
-  <li><b>Puertos</b>: Mapea el puerto 5432 del contenedor al puerto 5434 del host.</li>
-  <li><b>Variables de entorno</b>: Define el nombre de usuario y la contraseña para acceder a la base de datos PostgreSQL.</li>
-</ul>
+## Servicios
 
+### PostgreSQL
 
-### Servicio Backend
+El servicio `postgres` utiliza la imagen oficial de PostgreSQL y se configura con las siguientes características:
 
-<li><b>Build</b>: Utiliza el Dockerfile definido en el directorio raíz del proyecto para construir la imagen del backend.</li>
-<li><b>Container Name</b>: Establece el nombre del contenedor como backend_container.</li>
-<li></li><b>Variables de entorno</b>: Define las variables de entorno necesarias para la conexión con la base de datos PostgreSQL, incluyendo el usuario, 
-la contraseña, el host, el puerto y el nombre de la base de datos.</li>
-<li><b>Volúmenes</b>: Monta el directorio ./Backend del host en el directorio /app del contenedor, lo que permite el desarrollo en tiempo real.</li>
-<li><b>Depends On</b>: Establece la dependencia del servicio backend sobre el servicio PostgreSQL, asegurando que el backend espere hasta que PostgreSQL 
-esté completamente iniciado antes de iniciar.</li>
-<li><b>Puertos</b>: Mapea el puerto 8000 del contenedor al puerto 8001 del host, lo que permite acceder al backend desde fuera del contenedor.</li>
+- Puerto del contenedor: `5432`
+- Puerto del host: `5434`
+- Nombre de usuario: `david`
+- Contraseña: `1234`
+- Volumen para persistir datos: `postgres_container:/var/lib/postgresql/data`
+- Archivo de inicialización: `./postgresql/db_init.sql`
 
-### Servicio Frontend
+### Backend
 
-<li><b>Build:</b> Utiliza el directorio ./Frontend para construir la imagen del frontend React.</li>
-<li><b>Container Name</b>: Establece el nombre del contenedor como frontend_react.</li>
-<li><b>Directorio de trabajo</b>: Establece el directorio de trabajo dentro del contenedor en /app, donde se encuentra el código del frontend.</li>
-<li><b>Puertos</b>: Mapea el puerto 5173 del contenedor al puerto 5173 del host, permitiendo acceder al frontend desde fuera del contenedor.</li>
-<li><b>Volúmenes</b>: Monta el directorio ./Frontend del host en el directorio /app del contenedor, lo que permite el desarrollo en tiempo real.</li>
+El servicio `backend` se construye a partir de un `Dockerfile.backend` y se configura con las siguientes características:
+
+- Puerto del contenedor: `8000`
+- Puerto del host: `8001`
+- Variables de entorno:
+  - Usuario de PostgreSQL: `david`
+  - Contraseña de PostgreSQL: `1234`
+  - Host de PostgreSQL: `postgres_container`
+  - Puerto de PostgreSQL: `5432`
+  - Base de datos de PostgreSQL: `emove`
+- Dependencias: `postgres`
+- Volumen: `./Backend:/app`
+
+### Frontend React
+
+El servicio `frontend-react` se construye a partir del directorio `./Frontend` y se configura con las siguientes características:
+
+- Puerto del contenedor: `5173`
+- Puerto del host: `5173`
+- Directorio de trabajo: `/app`
+- Volumen: `./Frontend:/app`
+
+## Instrucciones de Uso
+
+1. Clona este repositorio en tu máquina local.
+2. Asegúrate de tener Docker y Docker Compose instalados.
+3. Navega al directorio del repositorio clonado.
+4. Ejecuta el comando `docker-compose up` para iniciar los servicios.
+5. Accede a la aplicación desde tu navegador utilizando los puertos especificados en cada servicio.
 
 ### Volúmenes
 
@@ -252,23 +266,25 @@ esté completamente iniciado antes de iniciar.</li>
 
 Este archivo docker-compose.yml facilita la gestión y la ejecución de los servicios necesarios para la aplicación e-Move utilizando Docker Compose.
 
+
 ```
 version: '3'
 
 services:
   postgres:
-    image: postgres
+    image: postgres:15
     container_name: postgres_container
     volumes:
       - postgres_container:/var/lib/postgresql/data
-      - ./postgresql/db_init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./Backend/bk/exportacion.sql:/docker-entrypoint-initdb.d/exportacion.sql
     ports:
       - "5434:5432"
     environment:
       POSTGRES_USER: david
       POSTGRES_PASSWORD: 1234
+    networks:
+      - practica_net
       
-
   backend:
     build:
       context: .
@@ -286,6 +302,8 @@ services:
       - postgres
     ports:
       - "8001:8000"
+    networks:
+      - practica_net
 
   frontend-react:
     build:
@@ -296,10 +314,128 @@ services:
       - "5173:5173"
     volumes:
       - ./Frontend:/app
+    networks:
+      - practica_net
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_USER: david
+      PGADMIN_DEFAULT_EMAIL: david@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+          - practica_net
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_loadbalancer
+    ports:
+      - "80:80"
+    volumes:
+      - ./loadbalancer/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+      - frontend-react
+    command: ["nginx", "-g", "daemon off;"]
+    networks:
+      - practica_net
+      
 volumes:
   postgres_container:
+  pgadmin-data: {}
 
+networks:
+  practica_net: {}
+
+```
+
+### PgAdmin
+
+PgAdmin es una herramienta de administración y desarrollo para bases de datos PostgreSQL. Proporciona una interfaz gráfica intuitiva para administrar objetos de base de datos, escribir y ejecutar consultas SQL, importar/exportar datos, monitorear el rendimiento y gestionar la seguridad de la base de datos. Es útil para aquellos que prefieren una GUI para trabajar con PostgreSQL en lugar de la línea de comandos.
+
+Entrando a localhost:5050, estaremos en esta página de inicio:
+
+![Captura desde 2024-02-22 19-32-17](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/2b2f5a69-1be3-47ed-aa1c-e2c376e8627f)
+
+Como hemos configurado el docker-compose:
+
+```
+
+pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_USER: david
+      PGADMIN_DEFAULT_EMAIL: david@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+          - practica_net
+
+```
+
+Pondremos el email y el password que hayamos configurado, en este caso, david@gmail.com y 1234. Asi podremos entrar:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/f6fa6a73-fb85-4a03-bd2d-aaceb7ed86e5)
+
+Una vez accedamos por primera vez, entraremos aquí:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/b89e2033-1a2a-4bc3-985b-60afe628aa22)
+
+Boton derecho en servers>register>server como en la imagen:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/b39fc1b7-d3d5-44d0-9b36-3ad27e7bab9d)
+
+En la pestaña general, en nombre, lo nombraremos como nos apetezca que se llame la base de datos:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/d6195112-bba9-4c4e-add1-c71c23f27f95)
+
+En la pestaña connection, lo configuraciones de la siguiente forma y pulsamos en save:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/809d9784-646a-41a1-9487-f5d0a1f30437)
+
+Ya podremos ver nuestra nueva base de datos:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/32f35955-a8c1-4a61-bd98-73fd6426300e)
+
+Con boton derecho en por ejemplo, bikes, y en view/editData>view rows:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/349baca0-e3c5-4f0a-b231-2fce973895a6)
+
+Veremos los datos de la tabla bikes:
+
+![image](https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/80e1c905-0c31-4c9f-9c56-7eb61842ff47)
+
+# Configuración de Nginx como Balanceador de Carga
+
+Este archivo `docker-compose.yml` configura un servidor Nginx como un balanceador de carga para los servicios `backend` y `frontend-react`.
+
+## Servicio Nginx
+
+```yaml
+nginx:
+  image: nginx:latest
+  container_name: nginx_loadbalancer
+  ports:
+    - "80:80"
+  volumes:
+    - ./loadbalancer/nginx.conf:/etc/nginx/nginx.conf:ro
+  depends_on:
+    - backend
+    - frontend-react
+  command: ["nginx", "-g", "daemon off;"]
+  networks:
+    - practica_net
 ```
 
 ## Puertos que utliza e-Move
@@ -310,3 +446,6 @@ volumes:
 | docker-compose.yml    | - 5434:5432 (PostgreSQL) |
 |                       | - 8001:8000 (Backend)    |
 |                       | - 5173:5173 (Frontend)   |
+| PgAdmin               | - 5050                   | 
+| Loadbalancer          | / (frontend)             |
+|                       | /api/ (backend)          |
