@@ -28,4 +28,3 @@ EXPOSE 5173
 
 # Comando por defecto para ejecutar la aplicación en modo desarrollo
 CMD ["npm", "run", "dev"]
-

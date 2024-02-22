@@ -32,9 +32,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'backend']
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST =['http://localhost:5173']
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:81","http://localhost",
+    ]
 # Application definition
 
 INSTALLED_APPS = [

@@ -82,5 +82,3 @@ volumes:
 
 networks:
   practica_net: {}
-
-
