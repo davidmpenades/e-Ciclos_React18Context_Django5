@@ -23,8 +23,9 @@ Ya dentro del directorio del proyecto ejecuta el siguiente comando, esto nos int
 
 ```
 
-cd Frontend
-npm install
+cd Frontend &&
+npm install &&
+cd ..
 
 ```
 
