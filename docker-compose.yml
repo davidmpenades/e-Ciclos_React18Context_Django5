@@ -12,8 +12,9 @@ services:
     environment:
       POSTGRES_USER: david
       POSTGRES_PASSWORD: 1234
+    networks:
+      - practica_net
       
-
   backend:
     build:
       context: .
@@ -31,6 +32,8 @@ services:
       - postgres
     ports:
       - "8001:8000"
+    networks:
+      - practica_net
 
   frontend-react:
     build:
@@ -41,8 +44,43 @@ services:
       - "5173:5173"
     volumes:
       - ./Frontend:/app
+    networks:
+      - practica_net
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_USER: david
+      PGADMIN_DEFAULT_EMAIL: david@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+          - practica_net
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_loadbalancer
+    ports:
+      - "80:80"
+    volumes:
+      - ./loadbalancer/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+      - frontend-react
+    command: ["nginx", "-g", "daemon off;"]
+    networks:
+      - practica_net
+      
 volumes:
   postgres_container:
+  pgadmin-data: {}
+
+networks:
+  practica_net: {}
 
 
