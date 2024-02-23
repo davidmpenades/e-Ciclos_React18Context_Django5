@@ -151,10 +151,10 @@ export default function StationCard() {
                   <span>Escanea el qr para dejar biciclera</span>
                 </Button>
               )}
-              <IncidentsSlotModal
+              {isAuth && (<IncidentsSlotModal
                 slotId={slot.id}
                 addIncident={useAddSlotIncidence}
-              />
+              />)}
             </div>
           </div>
         ))}
