@@ -36,13 +36,13 @@
 ### Planes
 
 <p align="center">
-  <img src="https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/d0ffedc9-e309-4ad3-85a1-979b75113d9b" alt="Home" style="width: 60%;" />
+  <img src="https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/d0ffedc9-e309-4ad3-85a1-979b75113d9b" alt="Home" style="width: 65%;" />
 </p>
 
 ### Contacto
 
 <p align="center">
-  <img src="https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/7f8123dd-4da9-4f28-8b09-701237a729a6" alt="Home" style="width: 60%;" />
+  <img src="https://github.com/davidmpenades/e-Move_React18Context_Django5/assets/118437119/7f8123dd-4da9-4f28-8b09-701237a729a6" alt="Home" style="width: 65%;" />
 </p>
 
 ### Dashboard
